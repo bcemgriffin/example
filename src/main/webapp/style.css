@@ -1,0 +1,124 @@
+@charset "utf-8";
+{
+margin: 0;
+padding: 0;
+}
+
+.grid {
+	display: grid;    
+    grid-template-columns: 30px repeat(6, 1fr) 30px;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas: 
+    ". title title title title title title ."
+    ". header header header header search search ."
+    ". sidebar content content content content content ."
+    ". . footer footer footer footer footer .";
+}
+
+.grid2 {
+	display: grid;    
+    grid-template-columns: 30px repeat(6, 1fr) 30px;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas: 
+    ". title title title title title title ."
+    ". header header header header search search ."
+    ". sidebar content content content2 content2 content2 ."
+    ". . footer footer footer footer footer .";
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+.title {
+	grid-area: title;
+ 
+    border: 2px solid black;
+    background-color: lightgray;    
+}
+
+.header {
+	grid-area: header;
+	border: 2px solid black;
+}
+.search {
+	grid-area: search;
+    float: right;
+    border: 2px solid black;
+}
+.search .search-container {
+  float: right;
+}
+.search .search-container input[type=text] {
+  padding: 6px;
+  margin-top: 4px;
+  font-size: 14px;
+  border: 1px solid black; 
+}
+.search .search-container button {
+  padding: 6px 10px;
+  margin-top: 4px;
+  margin-right: 48px;
+  background: #ddd;
+  font-size: 14px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+.search button:hover {
+  background: #ccc;
+}
+
+.sidebar {
+	grid-area: sidebar;
+    background-color: lightgray;
+    border: 1px solid black; 
+    
+}
+.sidebar a {
+    float: none;
+    display: block;
+    color: black;
+    text-align: left;
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 17px;
+}
+.sidebar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+.sidebar a.active {
+    background-color: whitesmoke;
+}
+
+.content {
+	grid-area: content;
+    
+}
+.content2 {
+	grid-area: content2;
+    
+}
+.footer {
+	grid-area: footer;
+}
+
+.row {
+	font-size: 14px;
+}
+.row tr div:nth-child(even) {
+	background-color: white;
+}
+
+.row tr div:nth-child(odd) {
+	background-color: whitesmoke;
+}
+
+
+
