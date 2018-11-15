@@ -1,0 +1,13 @@
+MyWebsite\MsgBean.class
+MyWebsite\RecipeBean.class
+MyWebsite\RecipeListBean.class
+MyWebsite\UpdateRecipeDetailsServlet.class
+MyWebsite\RecipeServlet.class
+MyWebsite\ReadRecipeDetailsServlet.class
+MyWebsite\RecipeDetailBean.class
+MyWebsite\MainServlet.class
+MyWebsite\LoginServlet.class
+MyWebsite\ReadRecipesServlet.class
+service\RecipeListService.class
+MyWebsite\SessionBean.class
+MyWebsite\UserBean.class
