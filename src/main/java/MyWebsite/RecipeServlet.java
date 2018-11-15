@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class RecipeServlet
@@ -37,24 +38,33 @@ public class RecipeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-        String param = request.getParameter("actionAndrecipeid");
-        int index = param.indexOf(",");
-        String action = param.substring(0,index-1);
-        String recipeId = String.valueOf(param.substring(index+1));
+		
+		HttpSession session = request.getSession();
+		SessionBean sessionBean = (SessionBean)session.getAttribute("sessionBean");
+
         RequestDispatcher rd = null;
         
-        if (action == "Edit") {
-        	request.setAttribute("recipeId",recipeId);
+		String param = (String)request.getParameter("actionAndrecipeid");
+        int index = param.indexOf(",");
+        String action = param.substring(0,index);
+        sessionBean.setcurrentRecipeId(Integer.valueOf(param.substring(index+1)));
 
-            rd=request.getRequestDispatcher("./ReadRecipeDetailsServlet");
+      
+        MsgBean msgobj = new MsgBean();
+        msgobj.setMessage("fields:" +  index + " " + action + " " + sessionBean.getcurrentRecipeId());
+        request.setAttribute("msgBean", msgobj);
+        
+        if (action.equals("Edit")) {
+        	rd=request.getRequestDispatcher("ReadRecipeDetailsServlet");
             rd.forward(request, response);
-        } else if (action == "Show") {
-            rd=request.getRequestDispatcher("./ShowRecipeDetailsServlet");
+        } else if (action.equals("Show")) {
+            rd=request.getRequestDispatcher("ShowRecipeDetailsServlet");
+            rd.forward(request, response);
+        } else {
+            rd=request.getRequestDispatcher("listrecipe.jsp");
             rd.forward(request, response);
         }
-        
-        rd=request.getRequestDispatcher("listrecipe.jsp");
-        rd.forward(request, response);
+
 	}
 
 }

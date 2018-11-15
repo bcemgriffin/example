@@ -12,6 +12,7 @@ public class SessionBean implements Serializable {
 		this.noOfPages = 0;
 		this.filterValue = "";
 		this.recipeListObj = new ArrayList<RecipeBean>();
+		this.currentRecipeId = 0;
 	}
 	/**
 	 * 
@@ -22,6 +23,7 @@ public class SessionBean implements Serializable {
 	public int noOfPages;
 	public String filterValue;
 	public ArrayList<RecipeBean> recipeListObj;
+	public int currentRecipeId;
 	
 	public int getCurrentPage() {
 		return currentPage;
@@ -53,7 +55,12 @@ public class SessionBean implements Serializable {
 	public void setRecipeListObj(ArrayList<RecipeBean> recipeListObj) {
 		this.recipeListObj = recipeListObj;
 	}
-	
+	public int getcurrentRecipeId() {
+		return currentRecipeId;
+	}
+	public void setcurrentRecipeId(int currentRecipeId) {
+		this.currentRecipeId = currentRecipeId;
+	}	
 	
 
 }

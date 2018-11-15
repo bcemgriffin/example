@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import service.RecipeListService;
 
@@ -26,8 +27,8 @@ public class ReadRecipeDetailsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-     
-		doPost(request, response); 
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+
 	}
 
 	/**
@@ -36,17 +37,25 @@ public class ReadRecipeDetailsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
      
-        String recipe = request.getParameter("recipeid");
+		HttpSession session = request.getSession();
+		SessionBean sessionBean = (SessionBean)session.getAttribute("sessionBean");		
+		
+        int recipeId = sessionBean.getcurrentRecipeId();
+               
+        MsgBean msgobj = new MsgBean();
+        msgobj.setMessage("fields:" +  recipeId + ":" + recipeId + ":");
+        request.setAttribute("msgBean", msgobj);
+        
         RecipeDetailBean recipeobj = new RecipeDetailBean();
         
         RequestDispatcher rd = null;
         RecipeListService recipeService = new RecipeListService();
         
-        recipeobj = recipeService.getRecipeDetails(Integer.valueOf(recipe));
+        recipeobj = recipeService.getRecipeDetails(recipeId);
         
         request.setAttribute("recipeDetailBean",recipeobj);
         
         rd=request.getRequestDispatcher("editrecipe.jsp");
-        rd.forward(request, response); 
+        rd.forward(request, response);  
 	}
 }
