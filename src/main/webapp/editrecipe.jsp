@@ -26,7 +26,7 @@ table, th, td {
 </style>
 </head>
 <body>
-<div class="grid">
+<div class="grid3">
     <div class="title">
         <div class="center">
         <h1>Online Recipe Book</h1>
@@ -41,52 +41,74 @@ table, th, td {
         <a class="active" href="#editrecipe">Edit Recipe</a>
     </div>
     
-    <div class="content">
-    	<form method="post" action="UpdateRecipeDetailsServlet">
-			<table>
-			    <tr>
-			    	<th colspan=2>Recipe Details</th>
-            	</tr>
-				<tr>
-					<td style="width:150px">Recipe Id</td>
-					<td style="width:75%"><c:out value="${recipe.getId()}"/><input type="hidden" name="recipeId" value="${recipe.getId()}"></td>
-				</tr>
-				<tr>
-					<td style="width:150px">Recipe Name</td>
-					<td><input type="text" name="recipeName" value="${recipe.getName()}"/></td>
-				</tr>
-				<tr>
-					<td style="width:150px">Yield</td>
-					<td><input type="text" name="recipeYield" value="${recipe.getYield()}"/></td>
-				</tr>
-				<tr>
-					<td  style="width:150px">Yield Unit</td>
-					<td><input input="text" name="recipeYieldunit" placeholder="dozen, servings, ..." value="${recipe.getYieldunit()}"/></td>
-				</tr>
-				<tr>
-					<td style="width:150px">Prep Time <i>(HH:MM)</i></td>
-					<td><input type="text" name="recipePreptime" pattern="[0-9][0-9]:[0-9][0-9]" placeholder="HH:MM" value="${recipe.getPreptime()}"/></td>
-				</tr>
-				<tr>
-					<td style="width:150px">Cook Time <i>(HH:MM)</i></td>
-					<td><input type="text" name="recipeCooktime" pattern="[0-9][0-9]:[0-9][0-9]" placeholder="HH:MM" value="${recipe.getCooktime()}"/></td>
-				</tr>
-				<tr>
-					<td colspan=2>Directions</td>
-				</tr>
-				<tr>
-					<td colspan=2><textarea id="directions" name="recipeDirections">${recipe.getDirections()}</textarea></td>
-				</tr>
-				<tr><td colspan=2><button type="submit">Save</button></td></tr>
+    
+   	 	<div class="content">
+   	 	<form method="post" action="UpdateRecipeDetailsServlet">
+   	 		<table style="border: 1px solid black; width: 100%;">
+   	 			<tr style="border: none;">
+   	 				<td style="width:50%; border: none;"><h2>Recipe Details</h2></td>
+   	 				<td style="width:50%; border: none;"><h2>Ingredients</h2></td>
+   	 			</tr>
+   	 			<tr style="border: none;">
+   	 				<td style="width:50%; border: none;">
+   	 				
+  						<table style="border: none; width: 100%; height:100%">
+							<tr style="border: none;">
+								<td style="width:150px; border: none;"">Recipe Name</td>
+								<td style="border: none;"><input type="text" name="recipeName" value="${recipe.getName()}"/></td>
+							</tr>
+							<tr>
+								<td style="width:150px; border: none;">Yield</td>
+								<td style="border: none;"><input type="text" name="recipeYield" value="${recipe.getYield()}"/></td>
+							</tr>
+							<tr style="border: none;">
+								<td style="width:150px; border: none;">Yield Unit</td>
+								<td style="border: none;"><input input="text" name="recipeYieldunit" placeholder="dozen, servings, ..." value="${recipe.getYieldunit()}"/></td>
+							</tr>
+							<tr style="border: none;">
+								<td style="width:150px; border: none;">Prep Time <i>(HH:MM)</i></td>
+								<td style="border: none;"><input type="text" name="recipePreptime" pattern="[0-9][0-9]:[0-9][0-9]" placeholder="HH:MM" value="${recipe.getPreptime()}"/></td>
+							</tr>
+							<tr style="border: none;">
+								<td style="width:150px; border: none;">Cook Time <i>(HH:MM)</i></td>
+								<td style="border: none;"><input type="text" name="recipeCooktime" pattern="[0-9][0-9]:[0-9][0-9]" placeholder="HH:MM" value="${recipe.getCooktime()}"/></td>
+							</tr>
+						</table>
+			
+					</td>
+					<td style="width:50%; border: none;">
+						<table style="border: none; width: 100%;">
+							<td style="border: none;"></td>
+							<td style="border: none;">Amt</td>
+							<td style="border: none;">Unit</td>
+							<td style="border: none;">Ingredient</td>
+						<c:forEach var="index" begin="1" end="10">
+							<tr style="border: none;">
+								<td style="border: none;"><c:out value="${index}."/></td>
+								<td style="border: none;"><input input="text" name="ingredientAmt${index}" size="3"/></td>
+								<td style="border: none;"><input input="text" name="ingredientUnit${index}" size="5"/></td>
+								<td style="border: none;"><input input="text" name="ingredientName${index}" placeholder="Enter Ingredient ${index}" size="25"/></td>
+							</tr>
+						</c:forEach>
+						</table>
+					</td>
 			</table>
-		<script>
-			CKEDITOR.replace( 'directions' );
-		</script>
-		</form>
-	</div>
+		
+			<h2>Directions</h2>
+			<textarea id="directions" name="recipeDirections">${recipe.getDirections()}</textarea>
+			<button type="submit">Save</button>
+							
+			<script>
+				CKEDITOR.replace( 'directions' );
+			</script>
+			</form>
+		</div>
+
+	
 	
 	<div class="footer">
-        <div class="center">				
+        <div class="center">
+        Footer				
 		</div>
 	</div>
 </div>

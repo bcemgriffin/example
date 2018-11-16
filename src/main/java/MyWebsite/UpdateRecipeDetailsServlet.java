@@ -7,6 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import java.sql.Time;
 
 import service.RecipeListService;
@@ -35,21 +37,24 @@ public class UpdateRecipeDetailsServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-     
-        int recipeId = Integer.valueOf(request.getParameter("recipeId"));
+		
+		HttpSession session = request.getSession();
+        SessionBean sessionBean = (SessionBean)session.getAttribute("sessionBean");
+        int recipeId = sessionBean.getcurrentRecipeId();
+        
         String recipeName = request.getParameter("recipeName");
         int recipeYield = Integer.valueOf(request.getParameter("recipeYield"));
         String recipeYieldunit = request.getParameter("recipeYieldunit");
         String recipePreptime = request.getParameter("recipePreptime");
         String recipeCooktime = request.getParameter("recipeCooktime");
         String recipeDirections = request.getParameter("recipeDirections");
-        int sqlrc = 0;
+        
         RecipeDetailBean recipeobj = new RecipeDetailBean(recipeId, recipeName, recipeYield, recipeYieldunit, recipePreptime, recipeCooktime, recipeDirections);
         
         RequestDispatcher rd = null;
         RecipeListService recipeService = new RecipeListService();
         
-        sqlrc = recipeService.updateRecipeDetails(recipeobj);
+        recipeService.updateRecipeDetails(recipeobj);
         MsgBean msgobj = new MsgBean();
 //        msgobj.setMessage("sql:" + sqlrc + "fields:" + recipeId + recipeName + recipeYield + recipeYieldunit + recipePreptime + recipeCooktime + recipeDirections);
 

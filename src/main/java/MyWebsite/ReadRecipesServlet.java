@@ -38,13 +38,20 @@ public class ReadRecipesServlet extends HttpServlet {
         request.setAttribute("msgBean",msgobj);
             
         SessionBean sessionBean = (SessionBean)session.getAttribute("sessionBean");
-        String filterValue = (String)request.getParameter("filterValue");
-        int currentPage = Integer.valueOf(request.getParameter("currentPage"));
-        
+        String filterValue = sessionBean.getFilterValue();
+        if (request.getParameter("filterValue") != null) {
+        	filterValue = request.getParameter("filterValue");
+        };
+              
         if (filterValue == null) {
         	filterValue="";
         }
-        
+
+        int currentPage = sessionBean.getCurrentPage();
+        if (request.getParameter("currentPage") != null) {
+        	currentPage = Integer.valueOf(request.getParameter("currentPage"));
+        };
+                
         RequestDispatcher rd = null;
         RecipeListService recipeService = new RecipeListService();
         ArrayList<RecipeBean> recipelistobj = new ArrayList<RecipeBean>();
