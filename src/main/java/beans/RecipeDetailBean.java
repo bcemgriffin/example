@@ -1,7 +1,9 @@
-package MyWebsite;
+package beans;
 
+import java.io.InputStream;
 import java.io.Serializable;
 import java.sql.Time;
+import java.util.ArrayList;
 
 
 public class RecipeDetailBean implements Serializable {
@@ -16,13 +18,17 @@ public class RecipeDetailBean implements Serializable {
 	public String yieldunit;
 	public String preptime;
 	public String cooktime;
-	public String directions; 
+	public String directions;
+	public String photoName;
+	public InputStream photo;
+	public ArrayList<IngredientBean> ingredientlist; 
 	
 	public RecipeDetailBean() {
 		this.Name="null";
 		this.Id=0;
+		this.ingredientlist=new ArrayList<IngredientBean>();
 	}
-	public RecipeDetailBean(int id, String name, int yield, String yieldunit, String preptime, String cooktime, String directions) {
+	public RecipeDetailBean(int id, String name, int yield, String yieldunit, String preptime, String cooktime, String directions, String photoName, InputStream photo, ArrayList<IngredientBean> ingredientlist) {
 		this.Name=name;
 		this.Id=id;
 		this.yield=yield;
@@ -30,6 +36,9 @@ public class RecipeDetailBean implements Serializable {
 		this.preptime=preptime;
 		this.cooktime=cooktime;
 		this.directions=directions;
+		this.photoName=photoName;
+		this.photo=photo;
+		this.ingredientlist=ingredientlist;
 	}
 	public String getName() {
 		return Name;
@@ -72,6 +81,24 @@ public class RecipeDetailBean implements Serializable {
 	}
 	public void setDirections(String directions) {
 		this.directions = directions;
+	}
+	public ArrayList<IngredientBean> getIngredientlist() {
+		return ingredientlist;
+	}
+	public void setIngredientlist(ArrayList<IngredientBean> ingredientlist) {
+		this.ingredientlist = ingredientlist;
+	}
+	public InputStream getPhoto() {
+		return photo;
+	}
+	public void setPhoto(InputStream photo) {
+		this.photo = photo;
+	}
+	public String getPhotoName() {
+		return photoName;
+	}
+	public void setPhotoName(String photoName) {
+		this.photoName = photoName;
 	}
 
 }

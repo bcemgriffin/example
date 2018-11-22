@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import beans.MsgBean;
+import beans.RecipeBean;
+import beans.SessionBean;
+
 import javax.servlet.RequestDispatcher;
 
 /**
@@ -37,7 +42,7 @@ public class ReadRecipesServlet extends HttpServlet {
         MsgBean msgobj = new MsgBean();
         request.setAttribute("msgBean",msgobj);
             
-        SessionBean sessionBean = (SessionBean)session.getAttribute("sessionBean");
+        SessionBean sessionBean = (SessionBean) session.getAttribute("sessionBean");
         String filterValue = sessionBean.getFilterValue();
         if (request.getParameter("filterValue") != null) {
         	filterValue = request.getParameter("filterValue");

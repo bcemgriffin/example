@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>  
 <%@ page isELIgnored="false" %> 
-<%@ page import="MyWebsite.RecipeBean"%>
-<%@ page import="MyWebsite.RecipeListBean"%>
-<%@ page import="MyWebsite.SessionBean"%>
-<%@ page import="MyWebsite.MsgBean"%>
+<%@ page import="beans.RecipeBean"%>
+<%@ page import="beans.RecipeListBean"%>
+<%@ page import="beans.SessionBean"%>
+<%@ page import="beans.MsgBean"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.List"%>
 

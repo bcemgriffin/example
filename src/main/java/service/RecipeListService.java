@@ -1,7 +1,8 @@
 package service;
 
-import MyWebsite.RecipeBean;
-import MyWebsite.RecipeDetailBean;
+import beans.IngredientBean;
+import beans.RecipeBean;
+import beans.RecipeDetailBean;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class RecipeListService {
 
@@ -123,6 +125,16 @@ public class RecipeListService {
 			}
 	        rs.close();
 	        st.close();
+	        
+	        st = con.createStatement();
+	      	sql = "select * from INGREDIENT where recipe_id=" + String.valueOf(recipeId);
+    		rs = st.executeQuery(sql);
+	    	while (rs.next()) {
+	    		recipeobj.ingredientlist.add(new IngredientBean(rs.getDouble(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(3)));
+			}
+	        rs.close();
+	        st.close();
+	        
 	        con.close();
     	} catch (SQLException se) {
     		// TODO Auto-generated catch block
@@ -162,9 +174,29 @@ public class RecipeListService {
             ps.setString(5,recipe.getCooktime());
             ps.setString(6,recipe.getDirections());
             ps.setInt(7,recipe.getId());
+            ps.setString(8,recipe.getPhotoName());
+            ps.setBlob(9,recipe.getPhoto());
             i=ps.executeUpdate();
+            ps.close();
+	        
+	        ps = con.prepareStatement("delete from INGREDIENT where recipe_id=?");
+    		ps.setInt(1,recipe.getId());
+            i=ps.executeUpdate();
+            ps.close();
             
-	        ps.close();
+            ArrayList<IngredientBean> ingredientList = recipe.getIngredientlist();
+            for (IngredientBean ingredient : ingredientList ) {
+		        ps = con.prepareStatement("insert into INGREDIENT (recipe_id, name, amt, amt_string1, amt_string2, unit) values (?, ?, ?, ?, ?, ?)");
+	    		ps.setInt(1,recipe.getId());
+	    		ps.setString(2, ingredient.getIngredientName());
+	    		ps.setDouble(3, ingredient.getIngredientAmt());
+	    		ps.setString(4, ingredient.getIngredientAmtString1());
+	    		ps.setString(5, ingredient.getIngredientAmtString2());
+	    		ps.setString(6, ingredient.getIngredientUnit());
+	            i=ps.executeUpdate();
+	            ps.close();
+            }
+	        
 	        con.close();
     	} catch (SQLException se) {
     		// TODO Auto-generated catch block

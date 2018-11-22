@@ -1,4 +1,4 @@
-package MyWebsite;
+package beans;
 
 import java.io.Serializable;
 

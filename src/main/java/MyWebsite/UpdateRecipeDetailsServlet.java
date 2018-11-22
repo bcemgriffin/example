@@ -1,18 +1,32 @@
 package MyWebsite;
 
 import java.io.IOException;
+import java.io.InputStream;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
-import java.sql.Time;
+
+
+import beans.IngredientBean;
+import beans.MsgBean;
+import beans.RecipeDetailBean;
+import beans.SessionBean;
+
+import java.util.ArrayList;
 
 import service.RecipeListService;
+
+
 @WebServlet("/UpdateRecipeDetailsServlet")
+@MultipartConfig(maxFileSize = 16177215)    // upload file's size up to 16MB
 public class UpdateRecipeDetailsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     /**
@@ -49,14 +63,38 @@ public class UpdateRecipeDetailsServlet extends HttpServlet {
         String recipeCooktime = request.getParameter("recipeCooktime");
         String recipeDirections = request.getParameter("recipeDirections");
         
-        RecipeDetailBean recipeobj = new RecipeDetailBean(recipeId, recipeName, recipeYield, recipeYieldunit, recipePreptime, recipeCooktime, recipeDirections);
+    	Part filePart = request.getPart("recipePhoto");
+    	String photoName="";
+    	InputStream photo=null;
+    			
+    	if (filePart != null) {
+            // obtains input stream of the upload file
+    		photoName=filePart.getName();
+            photo=filePart.getInputStream();
+        }
+    	
+        String ingredientName[] = request.getParameterValues("ingredientName");
+        String ingredientAmt1[] = request.getParameterValues("ingredientAmt1");
+        String ingredientAmt2[] = request.getParameterValues("ingredientAmt2");
+        String ingredientUnit[] = request.getParameterValues("ingredientUnit");
+        ArrayList<IngredientBean> ingredientlist = new ArrayList<IngredientBean>();
+        
+        
         
         RequestDispatcher rd = null;
         RecipeListService recipeService = new RecipeListService();
+       
+        for (int i=0 ;  i<ingredientName.length; i++ ) {
+        	if (ingredientName[i] != "") {
+        		ingredientlist.add(new IngredientBean(ingredientAmt1[i], ingredientAmt2[i], ingredientUnit[i], ingredientName[i]));
+        	}
+        }
         
+        RecipeDetailBean recipeobj = new RecipeDetailBean(recipeId, recipeName, recipeYield, recipeYieldunit, recipePreptime, recipeCooktime, recipeDirections, photoName, photo, ingredientlist);
+ 
         recipeService.updateRecipeDetails(recipeobj);
         MsgBean msgobj = new MsgBean();
-//        msgobj.setMessage("sql:" + sqlrc + "fields:" + recipeId + recipeName + recipeYield + recipeYieldunit + recipePreptime + recipeCooktime + recipeDirections);
+        msgobj.setMessage(photoName);
 
         request.setAttribute("currentPage","0");
         request.setAttribute("recordsPerPage","10");

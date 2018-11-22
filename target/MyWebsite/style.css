@@ -15,15 +15,15 @@ padding: 0;
     ". . footer footer footer footer footer .";
 }
 
-.grid2 {
+.grid3 {
 	display: grid;    
-    grid-template-columns: 30px repeat(6, 1fr) 30px;
+    grid-template-columns: 1fr 5fr;
     grid-template-rows: auto auto auto auto;
     grid-template-areas: 
-    ". title title title title title title ."
-    ". header header header header search search ."
-    ". sidebar content content content2 content2 content2 ."
-    ". . footer footer footer footer footer .";
+    "title title"
+    "header header"
+    "sidebar content"
+    "footer footer";
 }
 
 .center {
@@ -43,12 +43,12 @@ padding: 0;
 
 .header {
 	grid-area: header;
-	border: 2px solid black;
+	border: none;
 }
 .search {
 	grid-area: search;
     float: right;
-    border: 2px solid black;
+    border: 1px solid black;
 }
 .search .search-container {
   float: right;
@@ -98,27 +98,39 @@ padding: 0;
 }
 
 .content {
-	grid-area: content;
-    
+	grid-area: content;    
 }
-.content2 {
-	grid-area: content2;
-    
+
+.content1 {
+	grid-area: content1;  
+	border: none;  
+}
+
+.content2 {	
+	grid-area: content2; 
+	border: none;   
+}
+
+.content3 {
+	grid-area: content3; 
+	border: none;   
+}
+
+.contentvscroll {
+	overflow-y: scroll;
+	max-height: 300px;
 }
 .footer {
 	grid-area: footer;
 }
 
-.row {
-	font-size: 14px;
-}
-.row tr div:nth-child(even) {
-	background-color: white;
-}
 
-.row tr div:nth-child(odd) {
-	background-color: whitesmoke;
+select {
+    width: 100%;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f1f1f1;
 }
-
 
 

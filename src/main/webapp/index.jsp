@@ -1,6 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="MyWebsite.MsgBean"%>
-<%@ page import="MyWebsite.SessionBean"%>
+<%@ page import="beans.MsgBean"%>
+<%@ page import="beans.SessionBean"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
 <%
