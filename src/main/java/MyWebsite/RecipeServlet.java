@@ -2,6 +2,7 @@ package MyWebsite;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import beans.RecipeBean;
 import beans.RecipeDetailBean;
 import beans.SessionBean;
 import service.RecipeListService;
@@ -39,7 +41,7 @@ public class RecipeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
 	/**
@@ -73,6 +75,22 @@ public class RecipeServlet extends HttpServlet {
         	request.setAttribute("recipeDetailBean",recipeobj);
             rd=request.getRequestDispatcher("showrecipe.jsp");
             rd.forward(request, response);
+        } else if (action.equals("Delete")) {
+        	int rc=recipeService.deleteRecipe(sessionBean.getcurrentRecipeId());
+            ArrayList<RecipeBean> recipelistobj = new ArrayList<RecipeBean>();
+            recipelistobj = recipeService.findRecipes(sessionBean.getCurrentPage(), sessionBean.getRecordsPerPage(), sessionBean.getFilterValue());
+            
+            int rows = recipeService.getNumberOfRows(sessionBean.getFilterValue());
+            int noOfPages = rows / sessionBean.recordsPerPage;
+            
+            if (noOfPages % sessionBean.recordsPerPage > 0) {
+                noOfPages++;
+            }
+            
+            sessionBean.setnoOfPages(noOfPages);
+            sessionBean.setRecipeListObj(recipelistobj);
+            rd=request.getRequestDispatcher("listrecipe.jsp");
+            rd.forward(request, response);      
         } else {
             rd=request.getRequestDispatcher("listrecipe.jsp");
             rd.forward(request, response);

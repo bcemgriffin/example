@@ -40,50 +40,57 @@ pageContext.setAttribute("ingredientlist", ingredientlistobj);
 
     <div class="sidebar">
         <a href="ReadRecipesServlet?recordsPerPage=10&currentPage=1&filterValue=">Recipes</a>
-        <a href="#addrecipe">Add Recipe</a>
+        <a href="addrecipe.jsp">Add Recipe</a>
         <a class="active" href="#showrecipe">Show Recipe</a>
+        <a href="RecipeServlet?actionAndrecipeid=Edit,${recipe.getId()}">Edit Recipe</a>
     </div>
     
     <div class="content">
     	<form method="post" action="ReadRecipesServlet">
-			<table>
-
-				<tr>
-					<td colspan=2><h2><c:out value="${recipe.getName()}"/></h2></td>
-				</tr>
-				<tr>
-					<td style="border: none;">Yields </td>
-					<td style="border: none;">${recipe.getYield()} ${recipe.getYieldunit()}</td>
-				</tr>
-				<tr>
-					<td style="border: none;">Prep Time <i style="font-size: 10;">(HH:MM)</i></td>
-					<td style="border: none;"><c:out value="${recipe.getPreptime()}"/></td>
-				</tr>
-				<tr>
-					<td style="border: none;">Cook Time <i style="font-size: 10;">(HH:MM)</i></td>
-					<td style="border: none;"><c:out value="${recipe.getCooktime()}"/></td>
-				</tr>
-				<tr>
-					<td colspan=2><h3>Ingredients</h3></td>
-				</tr>
-				<c:forEach var="ingredient" items="${ingredientlist}">
-					<tr style="border: none;">
-						
-				 		<td style="border: none;">
-				 			${ingredient.getIngredientAmtString1()} ${ingredient.getIngredientAmtString2()} ${ingredient.getIngredientUnit()}
-						</td>
-						<td style="border: none;">${ingredient.getIngredientName()}</td>
+    		<table>
+    			<tr>
+    		  	 <td valign="top" style="width:40%;">
+				  <table>
+	 				<tr>
+						<td colspan=2><h2><c:out value="${recipe.getName()}"/></h2></td>
 					</tr>
-				</c:forEach>
-				<tr>
-					<td colspan=2 style="border: none;"><h3>Directions</h3></td>
-				</tr>
-				<tr>
-					<td colspan=2 style="border: none;">${recipe.getDirections()}</td>
-				</tr>
-				<tr><td colspan=2 style="border: none;"><button type="submt">Close</button></td></tr>
-			</table>
+					<tr>
+						<td style="border: none;">Yields </td>
+						<td style="border: none;">${recipe.getYield()} ${recipe.getYieldunit()}</td>
+					</tr>
+					<tr>
+						<td style="border: none;">Prep Time <i style="font-size: 10;">(HH:MM)</i></td>
+						<td style="border: none;"><c:out value="${recipe.getPreptime()}"/></td>
+					</tr>
+					<tr>
+						<td style="border: none;">Cook Time <i style="font-size: 10;">(HH:MM)</i></td>
+						<td style="border: none;"><c:out value="${recipe.getCooktime()}"/></td>
+					</tr>
+					<tr>
+						<td colspan=2><h3>Ingredients</h3></td>
+					</tr>
+					<c:forEach var="ingredient" items="${ingredientlist}">
+						<tr style="border: none;">
+							
+					 		<td style="border: none;">
+					 			${ingredient.getIngredientAmtString1()} ${ingredient.getIngredientAmtString2()} ${ingredient.getIngredientUnit()}
+							</td>
+							<td style="border: none;">${ingredient.getIngredientName()}</td>
+						</tr>
+					</c:forEach>
+				   </table>
+				  </td>
+				  <td style="width:60%;">
+				  	<img src="/images/${recipe.getPhotoName()}" style="height:400px;" alt="Image Not Uploaded" />	
+				  </td>
+						  
+				  </tr>
+			 </table>
+			 <h3>Directions</h3>
+			 ${recipe.getDirections()}
+			 <button type="submit">Close</button>
 		</form>
+		
 	</div>
 	
 	<div class="footer">

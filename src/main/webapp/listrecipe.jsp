@@ -2,7 +2,6 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>  
 <%@ page isELIgnored="false" %> 
 <%@ page import="beans.RecipeBean"%>
-<%@ page import="beans.RecipeListBean"%>
 <%@ page import="beans.SessionBean"%>
 <%@ page import="beans.MsgBean"%>
 <%@ page import="java.util.ArrayList"%>
@@ -36,8 +35,12 @@ pageContext.setAttribute("msg", msgobj);
     
 <title>Recipe Book - List</title>
 <style>
-table, th, td {
+table, td {
     border: 1px solid black;
+}
+th {
+    border: 1px solid black;
+    background-color: whitesmoke;
 }
 </style>
     
@@ -50,17 +53,15 @@ table, th, td {
         	<h1>Online Recipe Book</h1>
         </div>
     </div>
-    
-    <div class="header"><c:out value="${msg.message}"/></div>
+<!--         <div class="header"></div>
+-->
+     <div class="header"><c:out value="${msg.message}"/></div>
+
     
     <div class="search">
        <div class="search-container">
      	<form method="post" action="ReadRecipesServlet">
             <input type="text" name="filterValue" value="${sessionbean.filterValue}">
-<!--
-            <input type="hidden" name="currentPage" value="1">
-     		<input type="hidden" name="recordsPerPage" value="10">
--->
             <button type="submit"><i class="fa fa-search"></i></button>
         </form>    
        </div>    
@@ -68,7 +69,7 @@ table, th, td {
     
     <div class="sidebar">
         <a class="active" href="ReadRecipesServlet?recordsPerPage=${recordsPerPage}&currentPage=1&filterValue=${filterValue}">Recipes</a>
-        <a href="#addrecipe">Add Recipe</a>
+        <a href="addrecipe.jsp">Add Recipe</a>
     </div>
     
     <div class="content">
@@ -81,12 +82,12 @@ table, th, td {
   			<form method="post" action="RecipeServlet">
         	<table>
         		<tr>
-            	    <th style="width:auto">Recipe Name</th>
+            	    <th colspan=4 style="width:auto">Recipes</th>
             	</tr>
            		<c:forEach var="recipe" items="${sessionbean.recipeListObj}">
      	   		   	<tr>
      	      	    	<td style="width:100%">${recipe.getName()}</td>
-     	      	    	
+     	      	    	<td style="width:55px"><button type="submit" name="actionAndrecipeid" value="Delete,${recipe.getId()}">Delete</button></td>
      	      	    	<td style="width:55px"><button type="submit" name="actionAndrecipeid" value="Edit,${recipe.getId()}">Edit</button></td>
      	      	    	
      	      	    	<td style="width:55px"><button type="submit" name="actionAndrecipeid" value="Show,${recipe.getId()}">Show</button></td>

@@ -6,14 +6,6 @@
 <%@ page import="beans.IngredientBean"%>
 <%@ page import="java.util.ArrayList" %>
 
-<%
-RecipeDetailBean recipeobj = new RecipeDetailBean();
-recipeobj=(RecipeDetailBean)request.getAttribute("recipeDetailBean");
-pageContext.setAttribute("recipe", recipeobj);
-
-ArrayList<IngredientBean> ingredientlistobj = recipeobj.getIngredientlist();
-pageContext.setAttribute("ingredientlist", ingredientlistobj);
-%>
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -77,7 +69,7 @@ pageContext.setAttribute("ingredientlist", ingredientlistobj);
 	
   </script>
     
-<title>Edit Recipe</title>
+<title>Add Recipe</title>
 <style>
 table, th, td {
     border: 1px solid black;
@@ -106,17 +98,17 @@ select {
 
     <div class="sidebar">
         <a href="ReadRecipesServlet?recordsPerPage=10&currentPage=1&filterValue=">Recipes</a>
-        <a href="addrecipe.jsp">Add Recipe</a>
-        <a class="active" href="#editrecipe">Edit Recipe</a>
+        <a class="active" href="#addrecipe">Add Recipe</a>
+        <a href="#editrecipe">Edit Recipe</a>
     </div>
     
     
    	 	<div class="content">
-  	 	 	<form method="post" action="UpdateRecipeDetailsServlet" enctype = "multipart/form-data">
+  	 	 	<form method="post" action="AddRecipeDetailsServlet" enctype = "multipart/form-data">
    	 		<table style="border: 1px solid black; width: 100%;">
    	 			<tr style="border: none;">
-   	 				<td style="width:35%; border: none;"><h2>Recipe Details</h2></td>
-   	 				<td style="width:65%; border: none;"><h2>Ingredients</h2></td>
+   	 				<td style="width:40%; border: none;"><h2>Recipe Details</h2></td>
+   	 				<td style="width:60%; border: none;"><h2>Ingredients</h2></td>
    	 			</tr>
    	 			<tr style="border: none;">
    	 				<td  valign="top" style="width:50%; border: none;">
@@ -124,33 +116,29 @@ select {
   						<table style="border: none; width: 100%; height:100%;">
 							<tr style="border: none;">
 								<td style="width:150px; border: none;">Recipe Name</td>
-								<td style="border: none;"><input type="text" name="recipeName" value="${recipe.getName()}"/></td>
+								<td style="border: none;"><input type="text" name="recipeName" /></td>
 							</tr>
 							<tr>
 								<td style="width:150px; border: none;">Yield</td>
-								<td style="border: none;"><input type="text" name="recipeYield" value="${recipe.getYield()}"/></td>
+								<td style="border: none;"><input type="text" name="recipeYield" /></td>
 							</tr>
 							<tr style="border: none;">
 								<td style="width:150px; border: none;">Yield Unit</td>
-								<td style="border: none;"><input type="text" name="recipeYieldunit" placeholder="dozen, servings, ..." value="${recipe.getYieldunit()}"/></td>
+								<td style="border: none;"><input type="text" name="recipeYieldunit" placeholder="dozen, servings, ..." /></td>
 							</tr>
 							<tr style="border: none;">
 								<td style="width:150px; border: none;">Prep Time <i style="font-size:12;">(HH:MM)</i></td>
-								<td style="border: none;"><input type="text" name="recipePreptime" pattern="[0-9][0-9]:[0-9][0-9]" placeholder="HH:MM" value="${recipe.getPreptime()}"/></td>
+								<td style="border: none;"><input type="text" name="recipePreptime" pattern="[0-9][0-9]:[0-9][0-9]" placeholder="HH:MM" /></td>
 							</tr>
 							
 							<tr style="border: none;">
 								<td style="width:150px; border: none;">Cook Time <i style="font-size:12;">(HH:MM)</i></td>
 								<td style="border: none;">
-									<input type="text" name="recipeCooktime" pattern="[0-9][0-9]:[0-9][0-9]" placeholder="HH:MM" value="${recipe.getCooktime()}"/>
+									<input type="text" name="recipeCooktime" pattern="[0-9][0-9]:[0-9][0-9]" placeholder="HH:MM" />
 								</td>
 							</tr>
 							<tr style="border: none;">
-								<td style="width:150px; border: none;">Current Image</td>
-								<td style="border: none;">${recipe.getPhotoName()}</td>
-							</tr>
-							<tr style="border: none;">
-								<td style="width:150px; border: none;">Pick New Image <i style="font-size:12;">(opt)</i></td>
+								<td style="width:150px; border: none;">Pick Image <i style="font-size:12;">(opt)</i></td>
 								<td style="border: none;"><input type = "file" name = "recipePhoto"/></td>
 							</tr>
 						</table>
@@ -163,22 +151,8 @@ select {
 							<td style="border: none;">Unit</td>
 							<td style="border: none;">Ingredient</td>
 						</tr>
-						
-						<c:forEach var="ingredient" items="${ingredientlist}">
-							
-							<tr style="border: none;">
-						 		<td style="border: none;">
-						 			<input style="width:50px;" type="number" name="ingredientAmt1" min="0" max="500" value="${ingredient.getIngredientAmtString1()}"/>
-									<input style="width:50px;" type="text" name="ingredientAmt2" pattern="[0-9]/[0-9]" value="${ingredient.getIngredientAmtString2()}"/>
-								</td>
-								<td style="border: none;">
-									<input style="width:80px" type="text" name="ingredientUnit" value="${ingredient.getIngredientUnit()}"/>
-								</td>
-								<td style="border: none;">
-									<input type="text" name="ingredientName" placeholder="Enter Ingredient ${index}" size="25" value="${ingredient.getIngredientName()}"/></td>
-							</tr>
-						</c:forEach>
-						<c:forEach var="index" begin="${ingredientlist.size()+1}" end="20">
+
+						<c:forEach var="index" begin="1" end="20">
 							<tr style="border: none;">
 						 		<td style="border: none;">
 						 			<input style="width:50px;" type="number" name="ingredientAmt1" min="0" max="500" value="0"/>
@@ -214,7 +188,7 @@ select {
 			</table>
 		
 			<h2>Directions</h2>
-			<textarea id="directions" name="recipeDirections">${recipe.getDirections()}</textarea>
+			<textarea id="directions" name="recipeDirections"></textarea>
 			<button type="submit">Save</button>
 							
 			<script>

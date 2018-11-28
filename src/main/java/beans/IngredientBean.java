@@ -72,23 +72,23 @@ public class IngredientBean implements Serializable {
 	}
 	static double convertAmtStringsToDbl(String amtInt, String fractionAmt) {
 		double amt=0.0;
-		if (amtInt == null || amtInt == "") {
+		if (amtInt.length() == 0) {
 			amt=0;
 		} else {
 			amt=Integer.valueOf(amtInt);
 		}
 		
-		if (fractionAmt == "1/8") {
+		if (fractionAmt.equals("1/8")) {
 			amt = amt + 0.125;
-		} else if (fractionAmt == "1/4") {
+		} else if (fractionAmt.equals("1/4")) {
 			amt = amt + 0.250;
-		} else if (fractionAmt == "1/3") {
+		} else if (fractionAmt.equals("1/3")) {
 			amt = amt + 0.333;
-		} else if (fractionAmt == "1/2") {
+		} else if (fractionAmt.equals("1/2")) {
 			amt = amt + 0.500;
-		} else if (fractionAmt == "2/3") {
+		} else if (fractionAmt.equals("2/3")) {
 			amt = amt + 0.667;
-		} else if (fractionAmt == "3/4") {
+		} else if (fractionAmt.equals("3/4")) {
 			amt = amt + 0.750;
 		} 
 		

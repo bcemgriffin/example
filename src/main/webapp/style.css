@@ -48,21 +48,23 @@ padding: 0;
 .search {
 	grid-area: search;
     float: right;
-    border: 1px solid black;
+    border: none;
 }
 .search .search-container {
   float: right;
 }
 .search .search-container input[type=text] {
   padding: 6px;
-  margin-top: 4px;
+  margin-top: 2px;
+  margin-bottom: 2px;
   font-size: 14px;
   border: 1px solid black; 
 }
 .search .search-container button {
   padding: 6px 10px;
-  margin-top: 4px;
-  margin-right: 48px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-right: 0px;
   background: #ddd;
   font-size: 14px;
   border: 1px solid black;
@@ -98,7 +100,8 @@ padding: 0;
 }
 
 .content {
-	grid-area: content;    
+	grid-area: content;  
+	margin: 0;  
 }
 
 .content1 {

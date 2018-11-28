@@ -106,17 +106,17 @@ select {
 
     <div class="sidebar">
         <a href="ReadRecipesServlet?recordsPerPage=10&currentPage=1&filterValue=">Recipes</a>
-        <a href="#addrecipe">Add Recipe</a>
+        <a href="addrecipe.jsp">Add Recipe</a>
         <a class="active" href="#editrecipe">Edit Recipe</a>
     </div>
     
     
    	 	<div class="content">
-   	 	<form method="post" action="UpdateRecipeDetailsServlet" enctype = "multipart/form-data">
+  	 	 	<form method="post" action="UpdateRecipeDetailsServlet" enctype = "multipart/form-data">
    	 		<table style="border: 1px solid black; width: 100%;">
    	 			<tr style="border: none;">
-   	 				<td style="width:40%; border: none;"><h2>Recipe Details</h2></td>
-   	 				<td style="width:60%; border: none;"><h2>Ingredients</h2></td>
+   	 				<td style="width:35%; border: none;"><h2>Recipe Details</h2></td>
+   	 				<td style="width:65%; border: none;"><h2>Ingredients</h2></td>
    	 			</tr>
    	 			<tr style="border: none;">
    	 				<td  valign="top" style="width:50%; border: none;">
@@ -146,8 +146,12 @@ select {
 								</td>
 							</tr>
 							<tr style="border: none;">
-								<td style="width:150px; border: none;">Photo</td>
-								<td style="border: none;"><input type = "file" name = "recipePhoto" size = "50" /></td>
+								<td style="width:150px; border: none;">Current Image</td>
+								<td style="border: none;">${recipe.getPhotoName()}</td>
+							</tr>
+							<tr style="border: none;">
+								<td style="width:150px; border: none;">Pick New Image <i style="font-size:12;">(opt)</i></td>
+								<td style="border: none;"><input type = "file" name = "recipePhoto"/></td>
 							</tr>
 						</table>
 					</td>
@@ -164,7 +168,7 @@ select {
 							
 							<tr style="border: none;">
 						 		<td style="border: none;">
-						 			<input style="width:50px;" type="number" name="ingredientAmt1" min="1" max="500" value="${ingredient.getIngredientAmtString1()}"/>
+						 			<input style="width:50px;" type="number" name="ingredientAmt1" min="0" max="500" value="${ingredient.getIngredientAmtString1()}"/>
 									<input style="width:50px;" type="text" name="ingredientAmt2" pattern="[0-9]/[0-9]" value="${ingredient.getIngredientAmtString2()}"/>
 								</td>
 								<td style="border: none;">

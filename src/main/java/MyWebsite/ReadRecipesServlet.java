@@ -73,18 +73,6 @@ public class ReadRecipesServlet extends HttpServlet {
         sessionBean.setnoOfPages(noOfPages);
         sessionBean.setFilterValue(filterValue);
         sessionBean.setRecipeListObj(recipelistobj);
-//        request.setAttribute("filterValue", filterValue);
-//        request.setAttribute("noOfPages", nOfPages);
-//        request.setAttribute("currentPage", currentPage);
-//        request.setAttribute("recordsPerPage", recordsPerPage);
-//        request.setAttribute("recipeListBean",recipelistobj);
-        
-//        session = request.getSession();
-//        session.setAttribute("recipeListObj", recipelistobj);
-//        session.setAttribute("filterValue", filterValue);
-//        session.setAttribute("noOfPages", nOfPages);
-//       session.setAttribute("currentPage", currentPage);
-//       session.setAttribute("recordsPerPage", recordsPerPage);
         
         rd=request.getRequestDispatcher("listrecipe.jsp");
         rd.forward(request, response); 

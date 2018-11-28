@@ -30,14 +30,14 @@ import java.util.ArrayList;
 import service.RecipeListService;
 
 
-@WebServlet("/UpdateRecipeDetailsServlet")
+@WebServlet("/AddRecipeDetailsServlet")
 @MultipartConfig(maxFileSize = 16177215)    // upload file's size up to 16MB
-public class UpdateRecipeDetailsServlet extends HttpServlet {
+public class AddRecipeDetailsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateRecipeDetailsServlet() {        
+    public AddRecipeDetailsServlet() {        
     	super();
         // TODO Auto-generated constructor stub
     }
@@ -63,8 +63,7 @@ public class UpdateRecipeDetailsServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
         SessionBean sessionBean = (SessionBean)session.getAttribute("sessionBean");
-        int recipeId = sessionBean.getcurrentRecipeId();
-        
+                
         String recipeName = request.getParameter("recipeName");
         int recipeYield = Integer.valueOf(request.getParameter("recipeYield"));
         String recipeYieldunit = request.getParameter("recipeYieldunit");
@@ -78,18 +77,18 @@ public class UpdateRecipeDetailsServlet extends HttpServlet {
         
         Part filePart = request.getPart("recipePhoto");
         if (filePart != null) {
-
-        	//photoName = "recipe" + recipeId + "photo";
         	photoName =Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        	//photoName = "recipe" + recipeId + "photo";
     		savePath="/opt/tomcat/images/" + photoName;
-    		if (photoName.length() > 0) { 
-	    		fileSaveDir = new File(savePath);
-	    		try {
-	    			filePart.write(savePath);}
-	    		catch (Exception e) {
-	    			msgobj.setMessage("Write exception: " + e);
-	    		}
+    		
+    		fileSaveDir = new File(savePath);
+    		try {
+    			filePart.write(savePath);}
+    		catch (Exception e) {
+    			msgobj.setMessage("Write exception: " + e);
+    		
     		}
+            
         }
     	
         String ingredientName[] = request.getParameterValues("ingredientName");
@@ -109,12 +108,12 @@ public class UpdateRecipeDetailsServlet extends HttpServlet {
         	}
         }
         
-        RecipeDetailBean recipeobj = new RecipeDetailBean(recipeId, recipeName, recipeYield, recipeYieldunit, recipePreptime, recipeCooktime, recipeDirections, photoName, ingredientlist);
+        RecipeDetailBean recipeobj = new RecipeDetailBean(0, recipeName, recipeYield, recipeYieldunit, recipePreptime, recipeCooktime, recipeDirections, photoName, ingredientlist);
         
         int rc=0;
-        rc=recipeService.updateRecipeDetails(recipeobj);
+        rc=recipeService.insertRecipeDetails(recipeobj);
         
-   //     msgobj.setMessage(msgobj.getMessage() + ":" + savePath + ":" + fileSaveDir.exists() + ":" + fileSaveDir.getAbsolutePath() + ":" + fileSaveDir.length() + ":" + fileSaveDir.isFile() );
+        msgobj.setMessage("rc:" + rc);
 
         request.setAttribute("currentPage","0");
         request.setAttribute("recordsPerPage","10");

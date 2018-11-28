@@ -20,7 +20,8 @@ public class RecipeDetailBean implements Serializable {
 	public String cooktime;
 	public String directions;
 	public String photoName;
-	public InputStream photo;
+	public String photo;
+	public InputStream photoIS;
 	public ArrayList<IngredientBean> ingredientlist; 
 	
 	public RecipeDetailBean() {
@@ -28,7 +29,7 @@ public class RecipeDetailBean implements Serializable {
 		this.Id=0;
 		this.ingredientlist=new ArrayList<IngredientBean>();
 	}
-	public RecipeDetailBean(int id, String name, int yield, String yieldunit, String preptime, String cooktime, String directions, String photoName, InputStream photo, ArrayList<IngredientBean> ingredientlist) {
+	public RecipeDetailBean(int id, String name, int yield, String yieldunit, String preptime, String cooktime, String directions, String photoName, ArrayList<IngredientBean> ingredientlist) {
 		this.Name=name;
 		this.Id=id;
 		this.yield=yield;
@@ -37,7 +38,6 @@ public class RecipeDetailBean implements Serializable {
 		this.cooktime=cooktime;
 		this.directions=directions;
 		this.photoName=photoName;
-		this.photo=photo;
 		this.ingredientlist=ingredientlist;
 	}
 	public String getName() {
@@ -88,11 +88,17 @@ public class RecipeDetailBean implements Serializable {
 	public void setIngredientlist(ArrayList<IngredientBean> ingredientlist) {
 		this.ingredientlist = ingredientlist;
 	}
-	public InputStream getPhoto() {
+	public String getPhoto() {
 		return photo;
 	}
-	public void setPhoto(InputStream photo) {
+	public void setPhoto(String photo) {
 		this.photo = photo;
+	}
+	public InputStream getPhotoIS() {
+		return photoIS;
+	}
+	public void setPhotoIS(InputStream photoIS) {
+		this.photoIS = photoIS;
 	}
 	public String getPhotoName() {
 		return photoName;
