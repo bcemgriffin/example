@@ -27,7 +27,7 @@ import beans.SessionBean;
 
 import java.util.ArrayList;
 
-import service.RecipeListService;
+import service.RecipeDataService;
 
 
 @WebServlet("/AddRecipeDetailsServlet")
@@ -58,7 +58,6 @@ public class AddRecipeDetailsServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter();
 		MsgBean msgobj = new MsgBean();
 		
 		HttpSession session = request.getSession();
@@ -100,7 +99,7 @@ public class AddRecipeDetailsServlet extends HttpServlet {
         
         
         RequestDispatcher rd = null;
-        RecipeListService recipeService = new RecipeListService();
+        RecipeDataService recipeService = new RecipeDataService();
        
         for (int i=0 ;  i<ingredientName.length; i++ ) {
         	if (ingredientName[i].length() > 0) {

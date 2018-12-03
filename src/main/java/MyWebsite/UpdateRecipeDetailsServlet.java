@@ -1,10 +1,7 @@
 package MyWebsite;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.nio.file.Paths;
 
@@ -27,7 +24,7 @@ import beans.SessionBean;
 
 import java.util.ArrayList;
 
-import service.RecipeListService;
+import service.RecipeDataService;
 
 
 @WebServlet("/UpdateRecipeDetailsServlet")
@@ -58,7 +55,6 @@ public class UpdateRecipeDetailsServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter();
 		MsgBean msgobj = new MsgBean();
 		
 		HttpSession session = request.getSession();
@@ -74,7 +70,8 @@ public class UpdateRecipeDetailsServlet extends HttpServlet {
  
         String photoName=""; 
         String savePath="";
-        File fileSaveDir = null;
+        @SuppressWarnings("unused")
+		File fileSaveDir = null;
         
         Part filePart = request.getPart("recipePhoto");
         if (filePart != null) {
@@ -101,7 +98,7 @@ public class UpdateRecipeDetailsServlet extends HttpServlet {
         
         
         RequestDispatcher rd = null;
-        RecipeListService recipeService = new RecipeListService();
+        RecipeDataService recipeService = new RecipeDataService();
        
         for (int i=0 ;  i<ingredientName.length; i++ ) {
         	if (ingredientName[i].length() > 0) {
@@ -111,7 +108,8 @@ public class UpdateRecipeDetailsServlet extends HttpServlet {
         
         RecipeDetailBean recipeobj = new RecipeDetailBean(recipeId, recipeName, recipeYield, recipeYieldunit, recipePreptime, recipeCooktime, recipeDirections, photoName, ingredientlist);
         
-        int rc=0;
+        @SuppressWarnings("unused")
+		int rc=0;
         rc=recipeService.updateRecipeDetails(recipeobj);
         
    //     msgobj.setMessage(msgobj.getMessage() + ":" + savePath + ":" + fileSaveDir.exists() + ":" + fileSaveDir.getAbsolutePath() + ":" + fileSaveDir.length() + ":" + fileSaveDir.isFile() );

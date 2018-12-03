@@ -34,6 +34,7 @@ pageContext.setAttribute("msg", msgobj);
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">     
     
 <title>Recipe Book - List</title>
+
 <style>
 table, td {
     border: 1px solid black;
@@ -49,15 +50,14 @@ th {
 <body>
 <div class="grid">
     <div class="title">
-        <div class="center">
-        	<h1>Online Recipe Book</h1>
-        </div>
+       	<h1>Online Recipe Book</h1>
     </div>
-<!--         <div class="header"></div>
--->
-     <div class="header"><c:out value="${msg.message}"/></div>
-
     
+    <div class="header">
+<!--
+    	<c:out value="${msg.message}"/>
+-->
+    </div>
     <div class="search">
        <div class="search-container">
      	<form method="post" action="ReadRecipesServlet">

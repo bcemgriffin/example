@@ -78,6 +78,7 @@ pageContext.setAttribute("ingredientlist", ingredientlistobj);
   </script>
     
 <title>Edit Recipe</title>
+
 <style>
 table, th, td {
     border: 1px solid black;
@@ -97,9 +98,7 @@ select {
 <body>
 <div class="grid3">
     <div class="title">
-        <div class="center">
-        <h1>Online Recipe Book</h1>
-        </div>
+       	<h1>Online Recipe Book</h1>
     </div>
     
     <div class="header"></div>
@@ -111,8 +110,8 @@ select {
     </div>
     
     
-   	 	<div class="content">
-  	 	 	<form method="post" action="UpdateRecipeDetailsServlet" enctype = "multipart/form-data">
+   	<div class="content">
+  	 	<form method="post" action="UpdateRecipeDetailsServlet" enctype = "multipart/form-data">
    	 		<table style="border: 1px solid black; width: 100%;">
    	 			<tr style="border: none;">
    	 				<td style="width:35%; border: none;"><h2>Recipe Details</h2></td>
@@ -120,8 +119,7 @@ select {
    	 			</tr>
    	 			<tr style="border: none;">
    	 				<td  valign="top" style="width:50%; border: none;">
-   	 				
-  						<table style="border: none; width: 100%; height:100%;">
+	  					<table style="border: none; width: 100%; height:100%;">
 							<tr style="border: none;">
 								<td style="width:150px; border: none;">Recipe Name</td>
 								<td style="border: none;"><input type="text" name="recipeName" value="${recipe.getName()}"/></td>
@@ -138,7 +136,6 @@ select {
 								<td style="width:150px; border: none;">Prep Time <i style="font-size:12;">(HH:MM)</i></td>
 								<td style="border: none;"><input type="text" name="recipePreptime" pattern="[0-9][0-9]:[0-9][0-9]" placeholder="HH:MM" value="${recipe.getPreptime()}"/></td>
 							</tr>
-							
 							<tr style="border: none;">
 								<td style="width:150px; border: none;">Cook Time <i style="font-size:12;">(HH:MM)</i></td>
 								<td style="border: none;">
@@ -156,59 +153,57 @@ select {
 						</table>
 					</td>
 					<td style="width:50%; border: none;">
-					  <div class="contentvscroll">
-						<table style="border: none; width: 100%;" >
-						<tr style="border: none;">
-							<td style="border: none;">Amt</td>
-							<td style="border: none;">Unit</td>
-							<td style="border: none;">Ingredient</td>
-						</tr>
+						<div class="contentvscroll">
+							<table style="border: none; width: 100%;" >
+								<tr style="border: none;">
+									<td style="border: none;">Amt</td>
+									<td style="border: none;">Unit</td>
+									<td style="border: none;">Ingredient</td>
+								</tr>
 						
-						<c:forEach var="ingredient" items="${ingredientlist}">
-							
-							<tr style="border: none;">
-						 		<td style="border: none;">
-						 			<input style="width:50px;" type="number" name="ingredientAmt1" min="0" max="500" value="${ingredient.getIngredientAmtString1()}"/>
-									<input style="width:50px;" type="text" name="ingredientAmt2" pattern="[0-9]/[0-9]" value="${ingredient.getIngredientAmtString2()}"/>
-								</td>
-								<td style="border: none;">
-									<input style="width:80px" type="text" name="ingredientUnit" value="${ingredient.getIngredientUnit()}"/>
-								</td>
-								<td style="border: none;">
-									<input type="text" name="ingredientName" placeholder="Enter Ingredient ${index}" size="25" value="${ingredient.getIngredientName()}"/></td>
-							</tr>
-						</c:forEach>
-						<c:forEach var="index" begin="${ingredientlist.size()+1}" end="20">
-							<tr style="border: none;">
-						 		<td style="border: none;">
-						 			<input style="width:50px;" type="number" name="ingredientAmt1" min="0" max="500" value="0"/>
-									<select style="width:50px;" id="amt" name="ingredientAmt2">
-										<option value=""></option>
-										<option value="1/8">1/8</option>
-										<option value="1/4">1/4</option>
-										<option value="1/3">1/3</option>
-										<option value="1/2">1/2</option>
-										<option value="2/3">2/3</option>
-										<option value="3/4">3/4</option>
-									</select>
-								</td>
-								<td style="border: none;" >
-									<select style="width:80px"id="unit" name="ingredientUnit">
-										<option value="pinch">pinch</option>
-										<option value="tsp">tsp</option>
-										<option value="tbls">tbls</option>
-										<option value="cup">cup</option>
-										<option value="oz">ounce</option>
-										<option value="lbs">lbs</option>
-									</select>
-								</td>
-								
-								<td style="border: none;"><input type="text" name="ingredientName" placeholder="Enter Ingredient ${index}" size="25"/></td>
-							</tr>
-						</c:forEach>
-						
-						</table>
-					  </div>
+								<c:forEach var="ingredient" items="${ingredientlist}">
+									<tr style="border: none;">
+								 		<td style="border: none;">
+								 			<input style="width:50px;" type="number" name="ingredientAmt1" min="0" max="500" value="${ingredient.getIngredientAmtString1()}"/>
+											<input style="width:50px;" type="text" name="ingredientAmt2" pattern="[0-9]/[0-9]" value="${ingredient.getIngredientAmtString2()}"/>
+										</td>
+										<td style="border: none;">
+											<input style="width:80px" type="text" name="ingredientUnit" value="${ingredient.getIngredientUnit()}"/>
+										</td>	
+										<td style="border: none;">
+											<input type="text" name="ingredientName" placeholder="Enter Ingredient ${index}" size="25" value="${ingredient.getIngredientName()}"/>
+										</td>
+									</tr>
+								</c:forEach>
+								<c:forEach var="index" begin="${ingredientlist.size()+1}" end="20">
+									<tr style="border: none;">
+						 				<td style="border: none;">
+						 					<input style="width:50px;" type="number" name="ingredientAmt1" min="0" max="500" value="0"/>
+											<select style="width:50px;" id="amt" name="ingredientAmt2">
+												<option value=""></option>
+												<option value="1/8">1/8</option>
+												<option value="1/4">1/4</option>
+												<option value="1/3">1/3</option>
+												<option value="1/2">1/2</option>
+												<option value="2/3">2/3</option>
+												<option value="3/4">3/4</option>
+											</select>
+										</td>
+										<td style="border: none;" >
+											<select style="width:80px"id="unit" name="ingredientUnit">
+												<option value="pinch">pinch</option>
+												<option value="tsp">tsp</option>
+												<option value="tbls">tbls</option>
+												<option value="cup">cup</option>
+												<option value="oz">ounce</option>
+												<option value="lbs">lbs</option>
+											</select>
+										</td>
+										<td style="border: none;"><input type="text" name="ingredientName" placeholder="Enter Ingredient ${index}" size="25"/></td>
+									</tr>
+								</c:forEach>
+							</table>
+						</div>
 					</td>
 				</tr>
 			</table>
@@ -220,15 +215,10 @@ select {
 			<script>
 				CKEDITOR.replace( 'directions' );
 			</script>
-			</form>
-		</div>
+		</form>
+	</div>
 
-	
-	
 	<div class="footer">
-        <div class="center">
-        Footer				
-		</div>
 	</div>
 </div>
 

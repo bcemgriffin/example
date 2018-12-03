@@ -1,7 +1,7 @@
 package MyWebsite;
 
 import java.io.IOException;
-import service.RecipeListService;
+import service.RecipeDataService;
 import java.util.*;
 
 import javax.servlet.ServletException;
@@ -43,33 +43,40 @@ public class ReadRecipesServlet extends HttpServlet {
         request.setAttribute("msgBean",msgobj);
             
         SessionBean sessionBean = (SessionBean) session.getAttribute("sessionBean");
-        String filterValue = sessionBean.getFilterValue();
+        
+        String filterValue = "";
+        int currentPage = 1;
+        int recordsPerPage=10;
+        
+        if (sessionBean != null) {
+        	filterValue = sessionBean.getFilterValue();
+        	currentPage = sessionBean.getCurrentPage();
+        	recordsPerPage = sessionBean.getRecordsPerPage();
+        } else {
+        	sessionBean = new SessionBean();
+        	session.setAttribute("sessionBean", sessionBean);
+        }
         if (request.getParameter("filterValue") != null) {
         	filterValue = request.getParameter("filterValue");
-        };
-              
-        if (filterValue == null) {
-        	filterValue="";
         }
-
-        int currentPage = sessionBean.getCurrentPage();
         if (request.getParameter("currentPage") != null) {
         	currentPage = Integer.valueOf(request.getParameter("currentPage"));
         };
                 
         RequestDispatcher rd = null;
-        RecipeListService recipeService = new RecipeListService();
+        RecipeDataService recipeService = new RecipeDataService();
         ArrayList<RecipeBean> recipelistobj = new ArrayList<RecipeBean>();
-        recipelistobj = recipeService.findRecipes(currentPage, sessionBean.recordsPerPage, filterValue);
+        recipelistobj = recipeService.findRecipes(currentPage, recordsPerPage, filterValue);
         
         int rows = recipeService.getNumberOfRows(filterValue);
-        int noOfPages = rows / sessionBean.recordsPerPage;
+        int noOfPages = rows / recordsPerPage;
         
-        if (noOfPages % sessionBean.recordsPerPage > 0) {
+        if (noOfPages % recordsPerPage > 0) {
             noOfPages++;
         }
         
         sessionBean.setCurrentPage(currentPage);
+        sessionBean.setRecordsPerPage(recordsPerPage);
         sessionBean.setnoOfPages(noOfPages);
         sessionBean.setFilterValue(filterValue);
         sessionBean.setRecipeListObj(recipelistobj);

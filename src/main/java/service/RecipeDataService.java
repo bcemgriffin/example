@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 
 
 
-public class RecipeListService {
+public class RecipeDataService {
 
     public ArrayList<RecipeBean> findRecipes(int currentPage, int recordsPerPage, String filterValue)  {
     	Connection con = null;
