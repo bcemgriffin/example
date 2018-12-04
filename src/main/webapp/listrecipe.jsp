@@ -73,7 +73,6 @@ th {
     </div>
     
     <div class="content">
- <!--   	<c:out value="${msg.message}"/> -->
         <c:if test="${sessionbean.currentPage == 0}">
         	<h1>Welcome to My Recipe Book!</h1>
         </c:if>
@@ -89,7 +88,6 @@ th {
      	      	    	<td style="width:100%">${recipe.getName()}</td>
      	      	    	<td style="width:55px"><button type="submit" name="actionAndrecipeid" value="Delete,${recipe.getId()}">Delete</button></td>
      	      	    	<td style="width:55px"><button type="submit" name="actionAndrecipeid" value="Edit,${recipe.getId()}">Edit</button></td>
-     	      	    	
      	      	    	<td style="width:55px"><button type="submit" name="actionAndrecipeid" value="Show,${recipe.getId()}">Show</button></td>
      	      	    
        	     		</tr>
@@ -135,11 +133,11 @@ th {
     </div>
 </div>
 
-
+<!-- 
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
-
+-->
 
 </body>
 </html>

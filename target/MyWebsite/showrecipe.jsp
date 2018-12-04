@@ -63,7 +63,7 @@ pageContext.setAttribute("ingredientlist", ingredientlistobj);
 								<td colspan=2><h2><c:out value="${recipe.getName()}"/></h2></td>
 							</tr>
 							<tr>
-								<td style="border: none;">Yields </td>
+								<td style="border: none; min-width: 150px;">Yields </td>
 								<td style="border: none;">${recipe.getYield()} ${recipe.getYieldunit()}</td>
 							</tr>
 							<tr>
