@@ -12,8 +12,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="stylesheet" href="style.css">
+<!-- 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"> 
+-->
 
 <script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
 <script src="js/jquery-3.3.1.js"></script>
@@ -58,7 +60,7 @@ select {
     <div class="header"></div>
 
     <div class="sidebar">
-        <a href="ReadRecipesServlet?recordsPerPage=10&currentPage=1&filterValue=">Recipes</a>
+        <a href="ReadRecipesServlet?recordsPerPage=10&currentPage=1&filterValue=">List Recipes</a>
         <a class="active" href="#addrecipe">Add Recipe</a>
     </div>
         

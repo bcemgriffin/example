@@ -29,7 +29,7 @@ public class RecipeDataService {
     	ResultSet rs = null;
     	ArrayList<RecipeBean> recipelistobj = new ArrayList<RecipeBean>();
 	    int start = currentPage * recordsPerPage - recordsPerPage;
-	    String sql = "select * from RECIPE where name like \"%" + filterValue + "%\" LIMIT " + start + ", " + recordsPerPage;
+	    String sql = "select * from RECIPE where name like \"%" + filterValue + "%\" ORDER BY name ASC LIMIT " + start + ", " + recordsPerPage;
     	
     	try {
     		Class.forName("com.mysql.jdbc.Driver");
