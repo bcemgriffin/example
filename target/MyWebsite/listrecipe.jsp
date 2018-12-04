@@ -16,8 +16,6 @@ ArrayList<RecipeBean> recipelistobj = new ArrayList<RecipeBean>();
 recipelistobj=(ArrayList<RecipeBean>)session.getAttribute("recipeListBean");
 pageContext.setAttribute("list", recipelistobj);
 
-
-
 MsgBean msgobj = new MsgBean();
 msgobj=(MsgBean)request.getAttribute("msgBean");
 pageContext.setAttribute("msg", msgobj);
@@ -31,17 +29,26 @@ pageContext.setAttribute("msg", msgobj);
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">     
+<!-- 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"> 
+-->
     
 <title>Recipe Book - List</title>
 
 <style>
-table, td {
+table, th, tr {
     border: 1px solid black;
+    border-collapse: collapse;
+    font-size: 17px;
+    padding: 5px;
 }
 th {
-    border: 1px solid black;
     background-color: whitesmoke;
+    font-size: 20px;
+}
+td {
+	padding: 3px;
+	font-size: 17px;
 }
 </style>
     
@@ -68,7 +75,7 @@ th {
     </div>
     
     <div class="sidebar">
-        <a class="active" href="ReadRecipesServlet?recordsPerPage=${recordsPerPage}&currentPage=1&filterValue=${filterValue}">Recipes</a>
+        <a class="active" href="ReadRecipesServlet?recordsPerPage=${recordsPerPage}&currentPage=1&filterValue=${filterValue}">List Recipes</a>
         <a href="addrecipe.jsp">Add Recipe</a>
     </div>
     
@@ -77,67 +84,51 @@ th {
         	<h1>Welcome to My Recipe Book!</h1>
         </c:if>
         <c:if test="${sessionbean.currentPage != 0}">
-
   			<form method="post" action="RecipeServlet">
-        	<table>
-        		<tr>
-            	    <th colspan=4 style="width:auto">Recipes</th>
-            	</tr>
-           		<c:forEach var="recipe" items="${sessionbean.recipeListObj}">
-     	   		   	<tr>
-     	      	    	<td style="width:100%">${recipe.getName()}</td>
-     	      	    	<td style="width:55px"><button type="submit" name="actionAndrecipeid" value="Delete,${recipe.getId()}">Delete</button></td>
-     	      	    	<td style="width:55px"><button type="submit" name="actionAndrecipeid" value="Edit,${recipe.getId()}">Edit</button></td>
-     	      	    	<td style="width:55px"><button type="submit" name="actionAndrecipeid" value="Show,${recipe.getId()}">Show</button></td>
-     	      	    
-       	     		</tr>
-       	    	</c:forEach>
-        	</table>
-        </form>
-        
+        		<table style="width:100%">
+           			<c:forEach var="recipe" items="${sessionbean.recipeListObj}">
+     	   		   		<tr>
+     	      	    		<td class="recipe-item"><a href="RecipeServlet?actionAndrecipeid=Show,${recipe.getId()}">${recipe.getName()}</a></td>
+       	     			</tr>
+       	    		</c:forEach>
+        		</table>
+        	</form>        
         </c:if>
 	</div>
 	
-    <div class="footer">
-        
-      <nav>      
+    <div class="footer">        
+    	<nav>      
         <ul class="pagination">
-        <c:if test="${sessionbean.currentPage > 1}">
-            <li class="page-item"><a class="page-link" 
-                href="ReadRecipesServlet?recordsPerPage=${sessionbean.recordsPerPage}&currentPage=${sessionbean.currentPage-1}&filterValue=${filterValue}"><<</a>
-            </li>
-        </c:if>
+        	<c:if test="${sessionbean.currentPage > 1}">
+            	<li class="nav-item">
+            		<a class="page-link" href="ReadRecipesServlet?recordsPerPage=${sessionbean.recordsPerPage}&currentPage=${sessionbean.currentPage-1}&filterValue=${filterValue}"><<</a>
+            	</li>
+        	</c:if>
 
-        <c:forEach begin="1" end="${sessionbean.noOfPages}" var="i">
-            <c:choose>
-                <c:when test="${sessionbean.currentPage eq i}">
-                    <li class="page-item active"><a class="page-link">
-                            ${i} <span class="sr-only">(current)</span></a>
-                    </li>
-                </c:when>
-                <c:otherwise>
-                    <li class="page-item"><a class="page-link" 
-                        href="ReadRecipesServlet?recordsPerPage=${sessionbean.recordsPerPage}&currentPage=${i}&filterValue=${filterValue}"">${i}</a>
-                    </li>
-                </c:otherwise>
-            </c:choose>
-        </c:forEach>
+        	<c:forEach begin="1" end="${sessionbean.noOfPages}" var="i">
+ 	        	<c:choose>
+   	           		<c:when test="${sessionbean.currentPage eq i}">
+                		<li class="nav-item active">
+                			<a class="page-link">${i}</a>
+                		</li>
+                	</c:when>
+                	<c:otherwise>
+                		<li class="nav-item">
+                			<a class="page-link" href="ReadRecipesServlet?recordsPerPage=${sessionbean.recordsPerPage}&currentPage=${i}&filterValue=${filterValue}">${i}</a>
+						</li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
 
-        <c:if test="${sessionbean.currentPage lt sessionbean.noOfPages}">
-            <li class="page-item"><a class="page-link" 
-                href="ReadRecipesServlet?recordsPerPage=${sessionbean.recordsPerPage}&currentPage=${sessionbean.currentPage+1}&filterValue=${filterValue}"">>></a>
-            </li>
-        </c:if>  
-	    </ul>	    
-      </nav>
+        	<c:if test="${sessionbean.currentPage lt sessionbean.noOfPages}">
+            	<li class="nav-item">
+            		<a class="page-link" href="ReadRecipesServlet?recordsPerPage=${sessionbean.recordsPerPage}&currentPage=${sessionbean.currentPage+1}&filterValue=${filterValue}">>></a>
+            	</li>
+        	</c:if>  
+		</ul>	    
+	    </nav>
     </div>
 </div>
-
-<!-- 
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
--->
 
 </body>
 </html>
