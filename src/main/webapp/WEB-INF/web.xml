@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>My Website Login</display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+    <servlet-name>RecipeServlet</servlet-name>
+    <servlet-class>MyWebsite.RecipeServlet</servlet-class>
+    <display-name>RecipeServlet</display-name>
+  	<description></description>
+  </servlet>
+
+  
+  <servlet>
+    <servlet-name>ReadRecipesServlet</servlet-name>
+    <servlet-class>MyWebsite.ReadRecipesServlet</servlet-class>
+    <description></description>
+    <display-name>ReadRecipesServlet</display-name>
+  </servlet>
+
+  
+  <servlet>
+    <servlet-name>ReadRecipeDetailsServlet</servlet-name>
+    <servlet-class>MyWebsite.ReadRecipeDetailsServlet</servlet-class>
+    <description></description>
+    <display-name>ReadRecipeDetailsServlet</display-name>
+  </servlet>
+
+  <servlet>
+    <servlet-name>UpdateRecipeDetailsServlet</servlet-name>
+    <servlet-class>MyWebsite.UpdateRecipeDetailsServlet</servlet-class>
+    <description></description>
+    <display-name>UpdateRecipeDetailsServlet</display-name>
+  </servlet>
+
+</web-app>
