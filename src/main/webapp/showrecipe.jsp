@@ -80,7 +80,8 @@ pageContext.setAttribute("ingredientlist", ingredientlistobj);
 							<table>
 								<c:forEach var="ingredient" items="${ingredientlist}">
 									<tr style="border: none;">
-						 				<td style="border: none; min-width: 150px;">${ingredient.getIngredientAmtString1()} ${ingredient.getIngredientAmtString2()} ${ingredient.getIngredientUnit()}</td>
+						 				<td style="border: none; text-align: right;">${ingredient.getIngredientAmtString1()} ${ingredient.getIngredientAmtString2()}</td>
+						 				<td style="border: none; min-width: 50px; text-align: left;">${ingredient.getIngredientUnit()}</td>
 										<td style="border: none;">${ingredient.getIngredientName()}</td>
 									</tr>
 								</c:forEach>
