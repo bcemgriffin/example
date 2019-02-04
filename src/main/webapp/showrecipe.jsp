@@ -19,10 +19,12 @@ pageContext.setAttribute("ingredientlist", ingredientlistobj);
 <meta charset="ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css">
+<!--
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"> 
+-->
 <script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
-	<script>
+<script>
 		function printDiv(divName){
 			var printContents = document.getElementById(divName).innerHTML;
 			var originalContents = document.body.innerHTML;
@@ -30,11 +32,13 @@ pageContext.setAttribute("ingredientlist", ingredientlistobj);
 			window.print();
 			document.body.innerHTML = originalContents;
 		}
-	</script>    
+</script>
+    
 <title>Recipe Details</title>
-<style>
 
+<style>
 </style>
+
 </head>
 <body>
 <div class="grid">
@@ -47,7 +51,7 @@ pageContext.setAttribute("ingredientlist", ingredientlistobj);
     <div class="header"></div>
 
     <div class="sidebar">
-        <a href="ReadRecipesServlet?recordsPerPage=10&currentPage=1&">Recipes</a>
+        <a href="ReadRecipesServlet?recordsPerPage=10&currentPage=1&">List Recipes</a>
         <a href="addrecipe.jsp">Add Recipe</a>
         <a class="active" href="#showrecipe">Show Recipe</a>
         <a href="RecipeServlet?actionAndrecipeid=Edit,${recipe.getId()}">Edit Recipe</a>
@@ -125,17 +129,15 @@ pageContext.setAttribute("ingredientlist", ingredientlistobj);
 		 		 		<div class="contentvscroll">
 				 				${recipe.getDirections()}
 	 	 				</div>
+	 	 				<button style="width:60px" onclick="printDiv('printMe')">Print</button>
+	 	 				<button style="width:60px" type="submit" name="actionAndrecipeid" value="List,0">Cancel</button>
+				 		<button style="width:60px" type="submit" name="actionAndrecipeid" value="Edit,${recipe.getId()}">Edit</button>
+				 		<button style="width:60px" type="submit" name="actionAndrecipeid" value="Delete,${recipe.getId()}">Delete</button>
 				 	</div>
 			 		<div class="content3p">
 			 			<h3>Directions</h3>
 				 		${recipe.getDirections()}
 	 	 			</div>
-					<div class="button1" >
-				 		<button style="width:60px" type="submit" name="actionAndrecipeid" value="List,0">Close</button>
-				 	</div>
-				 	<div class="button2">
-				 		<button style="width:60px" onclick="printDiv('printMe')">Print</button>
-					</div>
 				</div>
 			</div>
 		</form>

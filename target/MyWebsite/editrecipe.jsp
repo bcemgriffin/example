@@ -20,8 +20,11 @@ pageContext.setAttribute("ingredientlist", ingredientlistobj);
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="stylesheet" href="style.css">
+
+<!-- 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"> 
+-->
 
 <script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
 <script src="js/jquery-3.3.1.js"></script>
@@ -41,7 +44,9 @@ pageContext.setAttribute("ingredientlist", ingredientlistobj);
 
 <style>
 table, th, td {
-    border: 1px solid black;
+    border: none;
+    border-collapse: collapse;
+    margin: 0;
 }
 
 select {
@@ -62,7 +67,7 @@ select {
     <div class="header"></div>
 
     <div class="sidebar">
-        <a href="ReadRecipesServlet?recordsPerPage=10&currentPage=1&filterValue=">Recipes</a>
+        <a href="ReadRecipesServlet?recordsPerPage=10&currentPage=1&filterValue=">List Recipes</a>
         <a href="addrecipe.jsp">Add Recipe</a>
         <a class="active" href="#editrecipe">Edit Recipe</a>
     </div>
@@ -72,8 +77,8 @@ select {
   	 	<form method="post" action="UpdateRecipeDetailsServlet" enctype = "multipart/form-data">
    	 		<table style="border: 1px solid black; width: 100%;">
    	 			<tr style="border: none;">
-   	 				<th style="width:35%; border: none;"><h2>Recipe Details</h2></th>
-   	 				<th style="width:65%; border: none;"><h2>Ingredients    <a href="#" title="" class="add-ingredient"><i style="font-size:12; font-weight: normal;">Add ingredient row</i></a></h2></th>
+   	 				<th style="width:50%; border: none;"><h2>Recipe Details</h2></th>
+   	 				<th style="width:50%; border: none;"><h2>Ingredients    <a href="#" title="" class="add-ingredient"><i style="font-size:12; font-weight: normal;">Add ingredient row</i></a></h2></th>
    	 			</tr>
    	 			<tr style="border: none;">
    	 				<td  valign="top" style="width:50%; border: none;">
@@ -105,7 +110,7 @@ select {
 								<td style="border: none;">${recipe.getPhotoName()}</td>
 							</tr>
 							<tr style="border: none;">
-								<td style="width:150px; border: none;">Pick New Image <i style="font-size:12;">(opt)</i></td>
+								<td style="width:150px; border: none;">New Image <i style="font-size:12;">(opt)</i></td>
 								<td style="border: none;"><input type = "file" name = "recipePhoto"/></td>
 							</tr>
 						</table>
