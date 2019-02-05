@@ -2,7 +2,6 @@ package MyWebsite;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.file.Paths;
 
 import javax.servlet.RequestDispatcher;
@@ -14,8 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-
-
 
 import beans.IngredientBean;
 import beans.MsgBean;
@@ -98,6 +95,7 @@ public class UpdateRecipeDetailsServlet extends HttpServlet {
         
         
         RequestDispatcher rd = null;
+        
         RecipeDataService recipeService = new RecipeDataService();
        
         for (int i=0 ;  i<ingredientName.length; i++ ) {

@@ -5,17 +5,19 @@
 <%@ page import="beans.RecipeDetailBean"%>
 <%@ page import="beans.IngredientBean"%>
 <%@ page import="java.util.ArrayList" %>
+<%
+String[] fractions = {"", "1/8", "1/4", "1/3", "1/2", "2/3", "3/4"};
+pageContext.setAttribute("fractionsList", fractions);
 
+String[] units = {"", "pinch", "tsp", "tbls", "cup", "oz", "lbs"};
+pageContext.setAttribute("unitsList", units);
+%>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="stylesheet" href="style.css">
-<!-- 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"> 
--->
 
 <script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
 <script src="js/jquery-3.3.1.js"></script>
@@ -24,7 +26,15 @@
         	jQuery('a.add-ingredient').click(function(event){
             event.preventDefault();
 
-            var newRow = jQuery('<tr style="border: none;"><td style="border: none;"><input style="width:50px; text-align: right;" type="number" name="ingredientAmt1" min="0" max="500" value="0"/><select style="width:50px; padding:2px" id="amt" name="ingredientAmt2"><option value=""></option><option value="1/8">1/8</option><option value="1/4">1/4</option><option value="1/3">1/3</option><option value="1/2">1/2</option><option value="2/3">2/3</option><option value="3/4">3/4</option></select></td><td style="border: none;" ><select style="width:80px"id="unit" name="ingredientUnit"><option value="pinch">pinch</option><option value="tsp">tsp</option><option value="tbls">tbls</option><option value="cup">cup</option><option value="oz">ounce</option><option value="lbs">lbs</option></select></td><td style="border: none;"><input type="text" name="ingredientName" placeholder="Enter Ingredient ${index}" size="25"/></td></tr>');
+            var newRow = jQuery('<tr style="border: none;">' + 
+								'<td style="border: none;">' + 
+									'<input style="width:50px; text-align: right;" type="number" name="ingredientAmt1" min="0" max="500" value="0"/>' + 
+									'<select style="width:50px; padding:2px" id="amt" name="ingredientAmt2">' + 
+										'<c:forEach var="fraction" items="${fractionsList}"><option value="${fraction}">${fraction}</option></c:forEach></select></td>' + 
+									'<td style="border: none;">' + 
+									'<select style="width:80px"id="unit" name="ingredientUnit">' + 
+										'<c:forEach var="unit" items="${unitsList}"><option value="${unit}">${unit}</option></c:forEach></select></td>' + 
+								'<td style="border: none;"><input type="text" name="ingredientName" placeholder="Enter Ingredient ${index}" size="25"/></td></tr>');
              jQuery('table.ingredient-list').append(newRow);
 
         	});
@@ -116,23 +126,16 @@ select {
 									<tr style="border: none;">
 								 		<td style="border: none;">
 								 			<input style="width:50px; text-align: right;" type="number" name="ingredientAmt1" min="0" max="500" value="0"/><select style="width:50px;" id="amt" name="ingredientAmt2">
-												<option value=""></option>
-												<option value="1/8">1/8</option>
-												<option value="1/4">1/4</option>
-												<option value="1/3">1/3</option>
-												<option value="1/2">1/2</option>
-												<option value="2/3">2/3</option>
-												<option value="3/4">3/4</option>
+												<c:forEach var="fraction" items="${fractionsList}">
+													<option value="${fraction}">${fraction}</option>
+												</c:forEach>
 											</select>
 										</td>
 										<td style="border: none;" >
 											<select style="width:80px"id="unit" name="ingredientUnit">
-												<option value="pinch">pinch</option>
-												<option value="tsp">tsp</option>
-												<option value="tbls">tbls</option>
-												<option value="cup">cup</option>
-												<option value="oz">ounce</option>
-												<option value="lbs">lbs</option>
+												<c:forEach var="unit" items="${unitsList}">
+													<option value="${unit}">${unit}</option>
+												</c:forEach>
 											</select>
 										</td>								
 										<td style="border: none;"><input type="text" name="ingredientName" placeholder="Enter Ingredient" size="25"/></td>

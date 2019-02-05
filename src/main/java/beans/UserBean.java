@@ -3,6 +3,10 @@ package beans;
 import java.io.Serializable;
 
 public class UserBean implements Serializable {
+	@Override
+	public String toString() {
+		return "UserBean [userName=" + userName + ", password=" + password + "]";
+	}
 	/**
 	 * 
 	 */
