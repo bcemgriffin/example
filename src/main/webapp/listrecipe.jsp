@@ -98,7 +98,7 @@ td {
 	
     <div class="footer">        
     	<nav>      
-        <ul class="pagination">
+        <ul class="pagination" style="margin-top: 8px; margin-bottom: 8px;">
         	<c:if test="${sessionbean.currentPage > 1}">
             	<li class="nav-item">
             		<a class="page-link" href="ReadRecipesServlet?recordsPerPage=${sessionbean.recordsPerPage}&currentPage=${sessionbean.currentPage-1}&filterValue=${filterValue}"><<</a>

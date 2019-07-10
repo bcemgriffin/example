@@ -203,6 +203,8 @@ select {
 	display: flex;
 	padding-left: 0;
 	list-style: none;
+	margin-top: 8px;
+	margin-bottom: 8px;
 	border-radius: .25rem
 }
 

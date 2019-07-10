@@ -2,7 +2,6 @@ package MyWebsite;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.file.Paths;
 
 import javax.servlet.RequestDispatcher;
@@ -15,14 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-
-
 import beans.IngredientBean;
 import beans.MsgBean;
 import beans.RecipeDetailBean;
 import beans.SessionBean;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import service.RecipeDataService;
 
@@ -78,7 +76,9 @@ public class UpdateRecipeDetailsServlet extends HttpServlet {
 
         	//photoName = "recipe" + recipeId + "photo";
         	photoName =Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-    		savePath="/opt/tomcat/images/" + photoName;
+        	Map<String,String> envmap = System.getenv();
+        	savePath=envmap.get("CATALINA_HOME") + "/images/" + photoName;
+    	//	savePath="/opt/tomcat/images/" + photoName;
     		if (photoName.length() > 0) { 
 	    		fileSaveDir = new File(savePath);
 	    		try {
@@ -98,6 +98,7 @@ public class UpdateRecipeDetailsServlet extends HttpServlet {
         
         
         RequestDispatcher rd = null;
+        
         RecipeDataService recipeService = new RecipeDataService();
        
         for (int i=0 ;  i<ingredientName.length; i++ ) {
