@@ -20,6 +20,7 @@ import beans.RecipeDetailBean;
 import beans.SessionBean;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import service.RecipeDataService;
 
@@ -75,7 +76,9 @@ public class UpdateRecipeDetailsServlet extends HttpServlet {
 
         	//photoName = "recipe" + recipeId + "photo";
         	photoName =Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-    		savePath="/opt/tomcat/images/" + photoName;
+        	Map<String,String> envmap = System.getenv();
+        	savePath=envmap.get("CATALINA_HOME") + "/images/" + photoName;
+    	//	savePath="/opt/tomcat/images/" + photoName;
     		if (photoName.length() > 0) { 
 	    		fileSaveDir = new File(savePath);
 	    		try {
