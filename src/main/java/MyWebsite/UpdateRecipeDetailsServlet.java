@@ -81,9 +81,9 @@ public class UpdateRecipeDetailsServlet extends HttpServlet {
         	savePath2=envmap.get("CATALINA_HOME") + "/images/" + photoName;
     		savePath="/opt/tomcat/images/" + photoName;
     		if (photoName.length() > 0) { 
-	    		fileSaveDir = new File(savePath);
+	    		fileSaveDir = new File(savePath2);
 	    		try {
-	    			filePart.write(savePath);}
+	    			filePart.write(savePath2);}
 	    		catch (Exception e) {
 	    			msgobj.setMessage("Write exception: " + e);
 	    		}
