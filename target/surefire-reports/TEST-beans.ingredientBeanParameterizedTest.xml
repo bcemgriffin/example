@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="6" failures="0" name="beans.ingredientBeanParameterizedTest" time="0.013" errors="0" skipped="0">
+<testsuite tests="6" failures="0" name="beans.ingredientBeanParameterizedTest" time="0.008" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_191\jre\bin"/>
@@ -27,7 +27,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 10"/>
-    <property name="classworlds.conf" value="C:\Users\Mom and Dad\eclipse-workspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf6082483157361512296.tmp"/>
+    <property name="classworlds.conf" value="C:\Users\Mom and Dad\eclipse-workspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf8773312340292934548.tmp"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
     <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_191\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jre1.8.0_211/bin/server;C:/Program Files/Java/jre1.8.0_211/bin;C:/Program Files/Java/jre1.8.0_211/lib/amd64;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\AMD APP\bin\x86_64;C:\Program Files (x86)\AMD APP\bin\x86;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;c:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;c:\Program Files (x86)\Common Files\Roxio Shared\DLLShared\;c:\Program Files (x86)\Common Files\Roxio Shared\12.0\DLLShared\;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files\Calibre2\;C:\Program Files (x86)\Common Files\Plantronics\;C:\Program Files (x86)\Plantronics\MyHeadsetUpdater\;C:\Program Files (x86)\Plantronics\VoyagerEdge\;C:\Program Files (x86)\QuickTime\QTSystem\;C:\HashiCorp\Vagrant\bin;C:\Program Files (x86)\HP\IdrsOCR_15.2.10.1114\;C:\opscode\chefdk\bin\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\PuTTY\;C:\Program Files (x86)\Brackets\command;C:\Program Files\Git\cmd;C:\Users\Mom and Dad\AppData\Local\Microsoft\WindowsApps;C:\Users\Mom and Dad\AppData\Local\atom\bin;C:\Users\Mom and Dad\AppData\Local\Microsoft\WindowsApps;C:\Users\Mom and Dad\AppData\Local\GitHubDesktop\bin;C:\Program Files (x86)\EaseUS\Todo Backup\bin\x64\;F:\Users\Mom and Dad\Desktop\Java Development Stuff;;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -61,10 +61,10 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="beans.ingredientBeanParameterizedTest" name="testconvertAmtStringsToDbl[0]" time="0.012"/>
+  <testcase classname="beans.ingredientBeanParameterizedTest" name="testconvertAmtStringsToDbl[0]" time="0.008"/>
   <testcase classname="beans.ingredientBeanParameterizedTest" name="testconvertAmtStringsToDbl[1]" time="0"/>
   <testcase classname="beans.ingredientBeanParameterizedTest" name="testconvertAmtStringsToDbl[2]" time="0"/>
-  <testcase classname="beans.ingredientBeanParameterizedTest" name="testconvertAmtStringsToDbl[3]" time="0.001"/>
+  <testcase classname="beans.ingredientBeanParameterizedTest" name="testconvertAmtStringsToDbl[3]" time="0"/>
   <testcase classname="beans.ingredientBeanParameterizedTest" name="testconvertAmtStringsToDbl[4]" time="0"/>
   <testcase classname="beans.ingredientBeanParameterizedTest" name="testconvertAmtStringsToDbl[5]" time="0"/>
 </testsuite>
