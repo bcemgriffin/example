@@ -48,6 +48,10 @@ pageContext.setAttribute("unitsList", units);
              jQuery('table.ingredient-list').append(newRow);
 
         	});
+        	
+        	jQuery('a.remove-ingredient').click(function(event){
+        		$(this).parent().parent().remove();
+        	});
         });
 </script>  		
   
@@ -154,6 +158,9 @@ select {
 										</td>	
 										<td style="border: none;">
 											<input type="text" name="ingredientName" placeholder="Enter Ingredient ${index}" size="25" value="${ingredient.getIngredientName()}"/>
+										</td>
+										<td style="border: none;">
+											<a href="#" title="" class="remove-ingredient"><i style="font-size:12; font-weight: normal;">Remove</i></a>
 										</td>
 									</tr>
 								</c:forEach>
