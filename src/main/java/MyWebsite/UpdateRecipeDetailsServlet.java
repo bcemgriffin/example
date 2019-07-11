@@ -114,7 +114,7 @@ public class UpdateRecipeDetailsServlet extends HttpServlet {
 		int rc=0;
         rc=recipeService.updateRecipeDetails(recipeobj);
         
-        msgobj.setMessage(msgobj.getMessage() + ":" + savePath2 + ":" + fileSaveDir.exists() + ":" + fileSaveDir.getAbsolutePath() + ":" + fileSaveDir.length() + ":" + fileSaveDir.isFile() );
+        msgobj.setMessage(msgobj.getMessage() + ":" + savePath2 + ":" + savePath );
 
         request.setAttribute("currentPage","0");
         request.setAttribute("recordsPerPage","10");
