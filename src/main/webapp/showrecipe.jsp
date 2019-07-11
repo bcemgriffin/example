@@ -50,7 +50,7 @@ pageContext.setAttribute("ingredientlist", ingredientlistobj);
     </div>
     
     <div class="header">
-    <c:out value="${catalinabase}"/>
+    <c:out value="${catalinabase} : ${pageContext.request.requestURL}/>
     </div>
 
     <div class="sidebar">
