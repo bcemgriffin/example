@@ -11,7 +11,7 @@ RecipeDetailBean recipeobj = new RecipeDetailBean();
 recipeobj=(RecipeDetailBean)request.getAttribute("recipeDetailBean");
 pageContext.setAttribute("recipe", recipeobj);
 pageContext.setAttribute("catalinabase", System.getProperty("catalina.base"));
-
+pageContext.setAttribute("url", pageContext.request.requestURL);
 ArrayList<IngredientBean> ingredientlistobj = recipeobj.getIngredientlist();
 pageContext.setAttribute("ingredientlist", ingredientlistobj);
 %>
@@ -50,7 +50,7 @@ pageContext.setAttribute("ingredientlist", ingredientlistobj);
     </div>
     
     <div class="header">
-    <c:out value="${catalinabase} : ${pageContext.request.requestURL}/>
+    <c:out value="${catalinabase} : ${url}" />
     </div>
 
     <div class="sidebar">
