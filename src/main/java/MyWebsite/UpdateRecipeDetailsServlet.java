@@ -78,7 +78,7 @@ public class UpdateRecipeDetailsServlet extends HttpServlet {
         	//photoName = "recipe" + recipeId + "photo";
         	photoName =Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         	Map<String,String> envmap = System.getenv();
-        	savePath2=envmap.get("CATALINA_HOME") + "/images/" + photoName;
+        	savePath2=envmap.get("CATALINA_HOME") + "/webapps/MyWebsite/images/" + photoName;
     		savePath="/opt/tomcat/images/" + photoName;
     		if (photoName.length() > 0) { 
 	    		fileSaveDir = new File(savePath2);
