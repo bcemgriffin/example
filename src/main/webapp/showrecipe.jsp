@@ -121,7 +121,7 @@ pageContext.setAttribute("ingredientlist", ingredientlistobj);
 				  		</table>
 					</div>
 			  		<div class="content2">
-						<img src="/images/${recipe.getPhotoName()}" style="height:320px" alt="Image Not Uploaded" />
+						<img src="images/${recipe.getPhotoName()}" style="height:320px" alt="Image Not Uploaded" />
 			  		</div>
 
 			 		<div class="content3">
