@@ -68,6 +68,7 @@ public class UpdateRecipeDetailsServlet extends HttpServlet {
  
         String photoName=""; 
         String savePath="";
+        String savePath2="";
         @SuppressWarnings("unused")
 		File fileSaveDir = null;
         
@@ -77,8 +78,8 @@ public class UpdateRecipeDetailsServlet extends HttpServlet {
         	//photoName = "recipe" + recipeId + "photo";
         	photoName =Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         	Map<String,String> envmap = System.getenv();
-        	savePath=envmap.get("CATALINA_HOME") + "/images/" + photoName;
-    	//	savePath="/opt/tomcat/images/" + photoName;
+        	savePath2=envmap.get("CATALINA_HOME") + "/images/" + photoName;
+    		savePath="/opt/tomcat/images/" + photoName;
     		if (photoName.length() > 0) { 
 	    		fileSaveDir = new File(savePath);
 	    		try {
@@ -113,7 +114,7 @@ public class UpdateRecipeDetailsServlet extends HttpServlet {
 		int rc=0;
         rc=recipeService.updateRecipeDetails(recipeobj);
         
-   //     msgobj.setMessage(msgobj.getMessage() + ":" + savePath + ":" + fileSaveDir.exists() + ":" + fileSaveDir.getAbsolutePath() + ":" + fileSaveDir.length() + ":" + fileSaveDir.isFile() );
+        msgobj.setMessage(msgobj.getMessage() + ":" + savePath2 + ":" + fileSaveDir.exists() + ":" + fileSaveDir.getAbsolutePath() + ":" + fileSaveDir.length() + ":" + fileSaveDir.isFile() );
 
         request.setAttribute("currentPage","0");
         request.setAttribute("recordsPerPage","10");
