@@ -10,6 +10,7 @@
 RecipeDetailBean recipeobj = new RecipeDetailBean();
 recipeobj=(RecipeDetailBean)request.getAttribute("recipeDetailBean");
 pageContext.setAttribute("recipe", recipeobj);
+pageContext.setAttribute("catalinabase", System.getProperty("catalina.base"));
 
 ArrayList<IngredientBean> ingredientlistobj = recipeobj.getIngredientlist();
 pageContext.setAttribute("ingredientlist", ingredientlistobj);
@@ -121,7 +122,7 @@ pageContext.setAttribute("ingredientlist", ingredientlistobj);
 				  		</table>
 					</div>
 			  		<div class="content2">
-						<img src="images/${recipe.getPhotoName()}" style="height:320px" alt="Image Not Uploaded" />
+						<img src="${catalinabase}/images/${recipe.getPhotoName()}" style="height:320px" alt="Image Not Uploaded" />
 			  		</div>
 
 			 		<div class="content3">
