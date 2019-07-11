@@ -49,7 +49,9 @@ pageContext.setAttribute("ingredientlist", ingredientlistobj);
         </div>
     </div>
     
-    <div class="header"></div>
+    <div class="header">
+    <c:out value="${catalinabase}"/>
+    </div>
 
     <div class="sidebar">
         <a href="ReadRecipesServlet?recordsPerPage=10&currentPage=1&">List Recipes</a>
