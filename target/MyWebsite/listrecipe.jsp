@@ -61,10 +61,9 @@ td {
     </div>
     
     <div class="header">
-<!--
-    	<c:out value="${msg.message}"/>
--->
+<%--     	<c:out value="${msg.message}"/> --%>
     </div>
+    
     <div class="search">
        <div class="search-container">
      	<form method="post" action="ReadRecipesServlet">

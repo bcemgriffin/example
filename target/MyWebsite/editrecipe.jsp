@@ -30,7 +30,30 @@ pageContext.setAttribute("unitsList", units);
 
 <script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
 <script src="js/jquery-3.3.1.js"></script>
-<script src="js/add-ingredient.js"></script>  	
+<!-- <script src="js/add-ingredient.js"></script>   -->
+<script type="text/javascript">
+        jQuery(function(){
+        	jQuery('a.add-ingredient').click(function(event){
+            event.preventDefault();
+
+            var newRow = jQuery('<tr style="border: none;">' + 
+								'<td style="border: none;">' + 
+									'<input style="width:50px; text-align: right;" type="number" name="ingredientAmt1" min="0" max="500" value="0"/>' + 
+									'<select style="width:50px; padding:2px" id="amt" name="ingredientAmt2">' + 
+										'<c:forEach var="fraction" items="${fractionsList}"><option value="${fraction}">${fraction}</option></c:forEach></select></td>' + 
+									'<td style="border: none;">' + 
+									'<select style="width:80px"id="unit" name="ingredientUnit">' + 
+										'<c:forEach var="unit" items="${unitsList}"><option value="${unit}">${unit}</option></c:forEach></select></td>' + 
+								'<td style="border: none;"><input type="text" name="ingredientName" placeholder="Enter Ingredient ${index}" size="25"/></td></tr>');
+             jQuery('table.ingredient-list').append(newRow);
+
+        	});
+        	
+        	jQuery('a.remove-ingredient').click(function(event){
+        		$(this).parent().parent().remove();
+        	});
+        });
+</script>  		
   
 <title>Edit Recipe</title>
 
@@ -135,6 +158,9 @@ select {
 										</td>	
 										<td style="border: none;">
 											<input type="text" name="ingredientName" placeholder="Enter Ingredient ${index}" size="25" value="${ingredient.getIngredientName()}"/>
+										</td>
+										<td style="border: none;">
+											<a href="#" title="" class="remove-ingredient"><i style="font-size:12; font-weight: normal;">Remove</i></a>
 										</td>
 									</tr>
 								</c:forEach>

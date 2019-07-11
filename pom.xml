@@ -65,6 +65,8 @@
         <version>2.1</version>
         <configuration>
           <url>http://webserver.griffin.local:8080/manager/text</url>
+          <username>admin</username>
+          <password>tcadmin123</password>
         </configuration>
       </plugin>
     </plugins>

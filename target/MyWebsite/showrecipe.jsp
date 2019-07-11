@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <%@ page isELIgnored="false" %> 
 <%@ page import="beans.RecipeDetailBean"%>
 <%@ page import="beans.IngredientBean"%>
@@ -10,7 +11,6 @@
 RecipeDetailBean recipeobj = new RecipeDetailBean();
 recipeobj=(RecipeDetailBean)request.getAttribute("recipeDetailBean");
 pageContext.setAttribute("recipe", recipeobj);
-
 ArrayList<IngredientBean> ingredientlistobj = recipeobj.getIngredientlist();
 pageContext.setAttribute("ingredientlist", ingredientlistobj);
 %>
@@ -38,7 +38,7 @@ pageContext.setAttribute("ingredientlist", ingredientlistobj);
 
 <style>
 </style>
-
+   
 </head>
 <body>
 <div class="grid">
@@ -48,7 +48,8 @@ pageContext.setAttribute("ingredientlist", ingredientlistobj);
         </div>
     </div>
     
-    <div class="header"></div>
+    <div class="header">
+    </div>
 
     <div class="sidebar">
         <a href="ReadRecipesServlet?recordsPerPage=10&currentPage=1&">List Recipes</a>
@@ -121,7 +122,7 @@ pageContext.setAttribute("ingredientlist", ingredientlistobj);
 				  		</table>
 					</div>
 			  		<div class="content2">
-						<img src="/images/${recipe.getPhotoName()}" style="height:320px" alt="Image Not Uploaded" />
+						<img src="/MyWebsite/images/${recipe.getPhotoName()}" style="height:320px" alt="Image Not Uploaded - /MyWebsite/images/${recipe.getPhotoName()}" />
 			  		</div>
 
 			 		<div class="content3">
