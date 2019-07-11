@@ -11,7 +11,6 @@
 RecipeDetailBean recipeobj = new RecipeDetailBean();
 recipeobj=(RecipeDetailBean)request.getAttribute("recipeDetailBean");
 pageContext.setAttribute("recipe", recipeobj);
-pageContext.setAttribute("catalinabase", System.getProperty("catalina.base"));
 ArrayList<IngredientBean> ingredientlistobj = recipeobj.getIngredientlist();
 pageContext.setAttribute("ingredientlist", ingredientlistobj);
 %>
@@ -39,7 +38,7 @@ pageContext.setAttribute("ingredientlist", ingredientlistobj);
 
 <style>
 </style>
-    <c:set var="url">${pageContext.request.requestURL}</c:set>
+   
 </head>
 <body>
 <div class="grid">
@@ -50,7 +49,6 @@ pageContext.setAttribute("ingredientlist", ingredientlistobj);
     </div>
     
     <div class="header">
-    <c:out value="${catalinabase} : ${url}" />
     </div>
 
     <div class="sidebar">
@@ -124,7 +122,7 @@ pageContext.setAttribute("ingredientlist", ingredientlistobj);
 				  		</table>
 					</div>
 			  		<div class="content2">
-						<img src="/MyWebsite/images/${recipe.getPhotoName()}" style="height:320px" alt="Image Not Uploaded - ${catalinabase}/images/${recipe.getPhotoName()}" />
+						<img src="/MyWebsite/images/${recipe.getPhotoName()}" style="height:320px" alt="Image Not Uploaded - /MyWebsite/images/${recipe.getPhotoName()}" />
 			  		</div>
 
 			 		<div class="content3">
