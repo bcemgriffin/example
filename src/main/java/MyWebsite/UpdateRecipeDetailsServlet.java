@@ -78,12 +78,11 @@ public class UpdateRecipeDetailsServlet extends HttpServlet {
         	//photoName = "recipe" + recipeId + "photo";
         	photoName =Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         	Map<String,String> envmap = System.getenv();
-        	savePath2=envmap.get("CATALINA_HOME") + "/webapps/MyWebsite/images/" + photoName;
-    		savePath="/opt/tomcat/images/" + photoName;
+        	savePath=envmap.get("CATALINA_HOME") + "/webapps/MyWebsite" + "/images/" + photoName;
     		if (photoName.length() > 0) { 
-	    		fileSaveDir = new File(savePath2);
+	    		fileSaveDir = new File(savePath);
 	    		try {
-	    			filePart.write(savePath2);}
+	    			filePart.write(savePath);}
 	    		catch (Exception e) {
 	    			msgobj.setMessage("Write exception: " + e);
 	    		}

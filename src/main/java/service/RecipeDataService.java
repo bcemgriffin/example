@@ -15,12 +15,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 // Start of recipe service logic
 
 public class RecipeDataService {
 
     public ArrayList<RecipeBean> findRecipes(int currentPage, int recordsPerPage, String filterValue)  {
     	
+    	Context envContext = null;
     	Connection con = null;
     	Statement st = null;
     	ResultSet rs = null;
@@ -30,7 +36,14 @@ public class RecipeDataService {
     	
     	try {
     		Class.forName("com.mysql.jdbc.Driver");
-    		con = DriverManager.getConnection("jdbc:mysql://mysql.griffin.local:3306/MyWebsite", "admin", "mysqladmin123");
+//    		con = DriverManager.getConnection("jdbc:mysql://mysql.griffin.local:3306/MyWebsite", "admin", "mysqladmin123");
+
+    		envContext = new InitialContext();
+//    		Context initContext  = (Context)envContext.lookup("java:/comp/env");
+//    		DataSource ds = (DataSource)initContext.lookup("jdbc/recipeDB");
+    		DataSource ds = (DataSource)envContext.lookup("java:/comp/env/jdbc/recipeDB");
+    		con = ds.getConnection();
+    		
     		st = con.createStatement();
     		rs = st.executeQuery(sql);
     		while (rs.next()) {
@@ -38,10 +51,13 @@ public class RecipeDataService {
 			}
 	        rs.close();
 	        st.close();
-	        con.close();    		
+	        con.close();    
+        } catch (NamingException ne) {
+    		// TODO Auto-generated catch block
+    		ne.printStackTrace();
         } catch (SQLException se) {
-        		// TODO Auto-generated catch block
-        		se.printStackTrace();
+        	// TODO Auto-generated catch block
+        	se.printStackTrace();
     	} catch (ClassNotFoundException e) {
     		// TODO Auto-generated catch block
     		e.printStackTrace();
