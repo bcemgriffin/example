@@ -39,8 +39,6 @@ public class RecipeDataService {
 //    		con = DriverManager.getConnection("jdbc:mysql://mysql.griffin.local:3306/MyWebsite", "admin", "mysqladmin123");
 
     		envContext = new InitialContext();
-//    		Context initContext  = (Context)envContext.lookup("java:/comp/env");
-//    		DataSource ds = (DataSource)initContext.lookup("jdbc/recipeDB");
     		DataSource ds = (DataSource)envContext.lookup("java:/comp/env/jdbc/recipeDB");
     		con = ds.getConnection();
     		
@@ -82,6 +80,7 @@ public class RecipeDataService {
     public int getNumberOfRows(String filterValue) {
         
         int numOfRows = 0;
+    	Context envContext = null;
     	Connection con = null;
     	Statement st = null;
     	ResultSet rs = null;
@@ -90,7 +89,12 @@ public class RecipeDataService {
             
     	try {
     		Class.forName("com.mysql.jdbc.Driver");
-    		con = DriverManager.getConnection("jdbc:mysql://mysql.griffin.local:3306/MyWebsite", "admin", "mysqladmin123");
+//    		con = DriverManager.getConnection("jdbc:mysql://mysql.griffin.local:3306/MyWebsite", "admin", "mysqladmin123");
+    		
+    		envContext = new InitialContext();
+    		DataSource ds = (DataSource)envContext.lookup("java:/comp/env/jdbc/recipeDB");
+    		con = ds.getConnection();
+    		
     		st = con.createStatement();
     		rs = st.executeQuery(sql);
 	    	while (rs.next()) {
@@ -99,6 +103,9 @@ public class RecipeDataService {
 	        rs.close();
 	        st.close();
 	        con.close();
+        } catch (NamingException ne) {
+    		// TODO Auto-generated catch block
+    		ne.printStackTrace();	        
     	} catch (SQLException se) {
     		// TODO Auto-generated catch block
     		se.printStackTrace();
@@ -123,6 +130,7 @@ public class RecipeDataService {
     }
     
     public RecipeDetailBean getRecipeDetails(int recipeId) {
+    	Context envContext = null;
     	Connection con = null;
     	Statement st = null;
     	ResultSet rs = null;
@@ -133,7 +141,12 @@ public class RecipeDataService {
     	
     	try {
     		Class.forName("com.mysql.jdbc.Driver");
-    		con = DriverManager.getConnection("jdbc:mysql://mysql.griffin.local:3306/MyWebsite", "admin", "mysqladmin123");
+//    		con = DriverManager.getConnection("jdbc:mysql://mysql.griffin.local:3306/MyWebsite", "admin", "mysqladmin123");
+    		
+    		envContext = new InitialContext();
+    		DataSource ds = (DataSource)envContext.lookup("java:/comp/env/jdbc/recipeDB");
+    		con = ds.getConnection();
+    		
     		st = con.createStatement();
     		rs = st.executeQuery(sql);
 	    	if (rs.next()) {
@@ -160,6 +173,9 @@ public class RecipeDataService {
 	        st.close();
 	        
 	        con.close();
+        } catch (NamingException ne) {
+    		// TODO Auto-generated catch block
+    		ne.printStackTrace();
     	} catch (SQLException se) {
     		// TODO Auto-generated catch block
     		se.printStackTrace();
@@ -183,13 +199,19 @@ public class RecipeDataService {
 	    return recipeobj;
     }
     public int updateRecipeDetails(RecipeDetailBean recipe)  {
+    	Context envContext = null;
     	Connection con = null;
     	PreparedStatement ps = null;
     	int i = 0;
     	    	
     	try {
     		Class.forName("com.mysql.jdbc.Driver");
-    		con = DriverManager.getConnection("jdbc:mysql://mysql.griffin.local:3306/MyWebsite", "admin", "mysqladmin123");
+//    		con = DriverManager.getConnection("jdbc:mysql://mysql.griffin.local:3306/MyWebsite", "admin", "mysqladmin123");
+    		
+    		envContext = new InitialContext();
+    		DataSource ds = (DataSource)envContext.lookup("java:/comp/env/jdbc/recipeDB");
+    		con = ds.getConnection();
+    		
     		if (recipe.getPhotoName().isEmpty()) {
 	    		ps = con.prepareStatement("update RECIPE set name=?, yield=?, yield_unit=?, prep_time=?, cook_time=?, directions=? where id=?");
 	    		ps.setString(1,recipe.getName()); 
@@ -233,6 +255,9 @@ public class RecipeDataService {
             }
 	        
 	        con.close();
+        } catch (NamingException ne) {
+    		// TODO Auto-generated catch block
+    		ne.printStackTrace();
     	} catch (SQLException se) {
     		// TODO Auto-generated catch block
     		se.printStackTrace();
@@ -261,24 +286,30 @@ public class RecipeDataService {
     }
     
     public int insertRecipeDetails(RecipeDetailBean recipe)  {
+    	Context envContext = null;
     	Connection con = null;
     	PreparedStatement ps = null;
     	Statement stmt = null;
     	
     	int recipeId = 100;
-    	int i=0;
-    	String sql="";
+    	
     	    	
     	try {
     		Class.forName("com.mysql.jdbc.Driver");
-    		con = DriverManager.getConnection("jdbc:mysql://mysql.griffin.local:3306/MyWebsite", "admin", "mysqladmin123");
-			stmt=con.createStatement();
+//    		con = DriverManager.getConnection("jdbc:mysql://mysql.griffin.local:3306/MyWebsite", "admin", "mysqladmin123");
+    		
+    		envContext = new InitialContext();
+    		DataSource ds = (DataSource)envContext.lookup("java:/comp/env/jdbc/recipeDB");
+    		con = ds.getConnection();
+    		
+    		String sql="";
+    		
+    		stmt=con.createStatement();
     		if (recipe.getPhotoName().isEmpty()) {
 	    		sql="insert into RECIPE (name, yield, yield_unit, prep_time, cook_time, directions) values ('" + recipe.getName() + "', " + recipe.getYield() + ", '" + recipe.getYieldunit() + "', '" + recipe.getPreptime() + "', '" + recipe.getCooktime() + "', '" + recipe.getDirections() + "')";
     		} else {
 	    		sql="insert into RECIPE (name, yield, yield_unit, prep_time, cook_time, directions, photo_name) values ('" + recipe.getName() + "', " + recipe.getYield() + ", '" + recipe.getYieldunit() + "', '" + recipe.getPreptime() + "', '" + recipe.getCooktime() + "', '" +  recipe.getDirections() + "', '" +  recipe.getPhotoName() + "')";
     		}
-    		i=stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
     		ResultSet rs = stmt.getGeneratedKeys();
     		if (rs != null && rs.next()) {
     		    recipeId = rs.getInt(1);
@@ -305,6 +336,9 @@ public class RecipeDataService {
             }
 	        
 	        con.close();
+        } catch (NamingException ne) {
+    		// TODO Auto-generated catch block
+    		ne.printStackTrace();
     	} catch (SQLException se) {
     		File file = new File("/opt/tomcat/images/test.log");
     		PrintStream pstream=null;
@@ -341,14 +375,19 @@ public class RecipeDataService {
     	return recipeId;
     }    
     public int deleteRecipe(int recipeId)  {
+    	Context envContext = null;
     	Connection con = null;
     	PreparedStatement ps = null;
     	int i = 0;
     	    	
     	try {
     		Class.forName("com.mysql.jdbc.Driver");
-    		con = DriverManager.getConnection("jdbc:mysql://mysql.griffin.local:3306/MyWebsite", "admin", "mysqladmin123");
-
+//    		con = DriverManager.getConnection("jdbc:mysql://mysql.griffin.local:3306/MyWebsite", "admin", "mysqladmin123");
+    		
+    		envContext = new InitialContext();
+    		DataSource ds = (DataSource)envContext.lookup("java:/comp/env/jdbc/recipeDB");
+    		con = ds.getConnection();
+    		
 	        ps = con.prepareStatement("delete from RECIPE where id=?");
     		ps.setInt(1,recipeId);
             i=ps.executeUpdate();
@@ -360,6 +399,9 @@ public class RecipeDataService {
             ps.close();
             
 	        con.close();
+        } catch (NamingException ne) {
+    		// TODO Auto-generated catch block
+    		ne.printStackTrace();
     	} catch (SQLException se) {
     		// TODO Auto-generated catch block
     		se.printStackTrace();
