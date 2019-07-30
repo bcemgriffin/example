@@ -11,5 +11,5 @@
         username="admin" 
         password="mysqladmin123" 
         driverClassName="com.mysql.jdbc.Driver"
-        url="jdbc:mysql://mysql.griffin.local:3306/MyWebsite"/>
+        url="jdbc:mysql://mysql:3306/MyWebsite"/>
 </Context>
