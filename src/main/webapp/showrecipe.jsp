@@ -48,7 +48,7 @@ pageContext.setAttribute("node", node);
     <div class="title">
         <div class="center">
         <h1>Online Recipe Book</h1>
-      	<c:out value="hostName: ${node}" />
+      	<c:out value="hostName:${node}" />
         </div>
     </div>
     
