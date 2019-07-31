@@ -13,6 +13,8 @@ recipeobj=(RecipeDetailBean)request.getAttribute("recipeDetailBean");
 pageContext.setAttribute("recipe", recipeobj);
 ArrayList<IngredientBean> ingredientlistobj = recipeobj.getIngredientlist();
 pageContext.setAttribute("ingredientlist", ingredientlistobj);
+String node=request.getServerName();
+pageContext.setAttribute("node", node);
 %>
 <html>
 <head>
@@ -45,6 +47,7 @@ pageContext.setAttribute("ingredientlist", ingredientlistobj);
     <div class="title">
         <div class="center">
         <h1>Online Recipe Book</h1>
+      	<c:out value="${node}" />
         </div>
     </div>
     
