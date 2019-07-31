@@ -6,6 +6,7 @@
 <%@ page import="beans.RecipeDetailBean"%>
 <%@ page import="beans.IngredientBean"%>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.net.InetAddress" %>
 
 <%
 RecipeDetailBean recipeobj = new RecipeDetailBean();
@@ -13,7 +14,7 @@ recipeobj=(RecipeDetailBean)request.getAttribute("recipeDetailBean");
 pageContext.setAttribute("recipe", recipeobj);
 ArrayList<IngredientBean> ingredientlistobj = recipeobj.getIngredientlist();
 pageContext.setAttribute("ingredientlist", ingredientlistobj);
-String node=request.getServerName();
+String node=InetAddress.getLocalHost().getHostName();
 pageContext.setAttribute("node", node);
 %>
 <html>
