@@ -44,7 +44,9 @@ pageContext.setAttribute("unitsList", units);
 									'<td style="border: none;">' + 
 									'<select style="width:80px"id="unit" name="ingredientUnit">' + 
 										'<c:forEach var="unit" items="${unitsList}"><option value="${unit}">${unit}</option></c:forEach></select></td>' + 
-								'<td style="border: none;"><input type="text" name="ingredientName" placeholder="Enter Ingredient ${index}" size="25"/></td></tr>');
+								'<td style="border: none;"><input type="text" name="ingredientName" placeholder="Enter Ingredient ${index}" size="25"/></td>' +
+								'<td style="border: none;"><a href="#" title="" class="remove-ingredient"><i style="font-size:12; font-weight: normal; text-align: left;">Remove</i></a></td>' +
+								'</tr>');
              jQuery('table.ingredient-list').append(newRow);
 
         	});
