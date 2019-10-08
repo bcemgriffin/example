@@ -116,13 +116,22 @@ public class RecipeServlet extends HttpServlet {
         }
 	    catch (Exception e) {
 	        LOGGER.log(Level.SEVERE, "Caught exception while in doPost. Please investigate: " 
+<<<<<<< HEAD
 /*	                + e 
+=======
+	         /*       + e 
+>>>>>>> refs/remotes/origin/dev
 	                + Arrays.asList(e.getStackTrace())
 	                .stream()
 	                .map(Objects::toString)
 	                .collect(Collectors.joining("\n"))
+<<<<<<< HEAD
 	                */
 	                , e
+=======
+		*/
+			, e
+>>>>>>> refs/remotes/origin/dev
 	        );
 	    }
 
