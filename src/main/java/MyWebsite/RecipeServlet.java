@@ -2,6 +2,11 @@ package MyWebsite;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,7 +29,7 @@ import service.RecipeDataService;
 
 public class RecipeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private static final Logger LOGGER = Logger.getLogger(RecipeServlet.class.getName());   
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -46,13 +51,13 @@ public class RecipeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
+		LOGGER.info("Logger Name: "+LOGGER.getName());
 		// get session attributes
 		HttpSession session = request.getSession();
 		SessionBean sessionBean = (SessionBean)session.getAttribute("sessionBean");
 
         RequestDispatcher rd = null;
-        
+        try {
         //get action and recipe id
 		String param = (String)request.getParameter("actionAndrecipeid");
         int index = param.indexOf(",");
@@ -107,6 +112,17 @@ public class RecipeServlet extends HttpServlet {
             rd=request.getRequestDispatcher("listrecipe.jsp");
             rd.forward(request, response);
         }
+     
+        }
+	    catch (Exception e) {
+	        LOGGER.log(Level.SEVERE, "Caught exception while in doPost. Please investigate: " 
+	                + e 
+	                + Arrays.asList(e.getStackTrace())
+	                .stream()
+	                .map(Objects::toString)
+	                .collect(Collectors.joining("\n")), e
+	        );
+	    }
 
 	}
 
