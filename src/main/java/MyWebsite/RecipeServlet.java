@@ -120,7 +120,8 @@ public class RecipeServlet extends HttpServlet {
 	                + Arrays.asList(e.getStackTrace())
 	                .stream()
 	                .map(Objects::toString)
-	                .collect(Collectors.joining("\n"))*/
+	                .collect(Collectors.joining("\n"))
+	                */
 	                , e
 	        );
 	    }
