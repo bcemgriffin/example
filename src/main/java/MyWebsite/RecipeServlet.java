@@ -134,6 +134,7 @@ public class RecipeServlet extends HttpServlet {
 	        msgobj.setMessage(param + ":" + action + ":" + index + ":" + recipeId );
 	    }
         finally {
+        	request.setAttribute("msgBean", msgobj);
             rd=request.getRequestDispatcher("listrecipe.jsp");
             rd.forward(request, response);
         }
