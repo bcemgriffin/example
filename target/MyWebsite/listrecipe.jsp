@@ -61,7 +61,7 @@ td {
     </div>
     
     <div class="header">
-<%--     	<c:out value="${msg.message}"/> --%>
+     	<c:out value="${msg.message}"/> 
     </div>
     
     <div class="search">
@@ -87,7 +87,7 @@ td {
         		<table style="width:100%">
            			<c:forEach var="recipe" items="${sessionbean.recipeListObj}">
      	   		   		<tr>
-     	      	    		<td class="recipe-item"><a href="RecipeServlet?actionAndrecipeid=Show,${recipe.getId()}">${recipe.getName()}</a></td>
+     	      	    		<td class="recipe-item"><a href="RecipeServlet?actionAndrecipeid=Show,${recipe.getId()}">${recipe.getName()} </a></td>
        	     			</tr>
        	    		</c:forEach>
         		</table>

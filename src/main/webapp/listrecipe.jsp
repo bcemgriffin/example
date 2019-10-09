@@ -61,7 +61,7 @@ td {
     </div>
     
     <div class="header">
-<%--     	<c:out value="${msg.message}"/> --%>
+     	<c:out value="${msg.message}"/> 
     </div>
     
     <div class="search">
