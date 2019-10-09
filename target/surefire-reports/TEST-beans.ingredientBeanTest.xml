@@ -27,7 +27,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 10"/>
-    <property name="classworlds.conf" value="C:\Users\Mom and Dad\eclipse-workspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf1955903610077976630.tmp"/>
+    <property name="classworlds.conf" value="C:\Users\Mom and Dad\eclipse-workspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf1275760262693155286.tmp"/>
     <property name="github.downloads" value="true"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
     <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_191\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files/Java/jre1.8.0_211/bin/server;C:/Program Files/Java/jre1.8.0_211/bin;C:/Program Files/Java/jre1.8.0_211/lib/amd64;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\AMD APP\bin\x86_64;C:\Program Files (x86)\AMD APP\bin\x86;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;c:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;c:\Program Files (x86)\Common Files\Roxio Shared\DLLShared\;c:\Program Files (x86)\Common Files\Roxio Shared\12.0\DLLShared\;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files\Calibre2\;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Program Files (x86)\HP\IdrsOCR_15.2.10.1114\;C:\opscode\chefdk\bin\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\PuTTY\;C:\Program Files (x86)\Brackets\command;C:\Program Files\Git\cmd;C:\Program Files (x86)\Plantronics\Spokes3G\;C:\Users\Mom and Dad\AppData\Local\Microsoft\WindowsApps;C:\Users\Mom and Dad\AppData\Local\atom\bin;C:\Users\Mom and Dad\AppData\Local\Microsoft\WindowsApps;C:\Users\Mom and Dad\AppData\Local\GitHubDesktop\bin;;F:\Users\Mom and Dad\Desktop\Java Development Stuff;;."/>
@@ -62,8 +62,8 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="beans.ingredientBeanTest" name="testconvertAmtStringsToDbl_Cond_OneThird" time="0"/>
-  <testcase classname="beans.ingredientBeanTest" name="testconvertAmtStringsToDbl_Cond_OneAndOneHalf" time="0"/>
   <testcase classname="beans.ingredientBeanTest" name="testconvertAmtStringsToDbl_Cond_Zero" time="0"/>
+  <testcase classname="beans.ingredientBeanTest" name="testconvertAmtStringsToDbl_Cond_OneAndOneHalf" time="0"/>
   <testcase classname="beans.ingredientBeanTest" name="testconvertAmtStringsToDbl_Cond_OneEigth" time="0"/>
+  <testcase classname="beans.ingredientBeanTest" name="testconvertAmtStringsToDbl_Cond_OneThird" time="0"/>
 </testsuite>
