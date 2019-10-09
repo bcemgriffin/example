@@ -135,7 +135,8 @@ public class RecipeServlet extends HttpServlet {
 	                .map(Objects::toString)
 	                .collect(Collectors.joining("\n")), e
 	        );
-	        msgobj.setMessage(param + ":" + action + ":" + index + ":" + recipeId + ":" + place);
+	        msgobj.setMessage(param + ":" + action + ":" + index + ":" + recipeId + ":" + place + ":" + session + ":" + sessionBean);
+	         
 	    }
         finally {
         	request.setAttribute("msgBean", msgobj);
