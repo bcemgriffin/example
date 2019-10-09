@@ -61,6 +61,7 @@ public class RecipeServlet extends HttpServlet {
 		int index = 0;
 		String action = "";
 		int recipeId = 0;
+		String place = "";
 		
         RequestDispatcher rd = null;
         try {
@@ -70,14 +71,17 @@ public class RecipeServlet extends HttpServlet {
         action = param.substring(0,index);
               
         recipeId=Integer.valueOf(param.substring(index+1));
-        
+        place = "After getting action and id";
         sessionBean.setcurrentRecipeId(recipeId);
+        place = "After setCurrentRecipeId";
         
         //get recipe detail object
         RecipeDetailBean recipeobj = new RecipeDetailBean();
+        place = "After instantiating recipe detail bean";
         RecipeDataService recipeService = new RecipeDataService();
+        place = "After instantiating recipe service";
         recipeobj = recipeService.getRecipeDetails(sessionBean.getcurrentRecipeId());
-        
+        place = "After getting recipe details";
         if (action.equals("Edit")) {
         	request.setAttribute("recipeDetailBean",recipeobj);
         	rd=request.getRequestDispatcher("editrecipe.jsp");
@@ -131,7 +135,7 @@ public class RecipeServlet extends HttpServlet {
 	                .map(Objects::toString)
 	                .collect(Collectors.joining("\n")), e
 	        );
-	        msgobj.setMessage(param + ":" + action + ":" + index + ":" + recipeId );
+	        msgobj.setMessage(param + ":" + action + ":" + index + ":" + recipeId + ":" + place);
 	    }
         finally {
         	request.setAttribute("msgBean", msgobj);
