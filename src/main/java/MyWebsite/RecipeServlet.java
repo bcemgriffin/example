@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.MsgBean;
 import beans.RecipeBean;
 import beans.RecipeDetailBean;
 import beans.SessionBean;
@@ -55,14 +56,22 @@ public class RecipeServlet extends HttpServlet {
 		// get session attributes
 		HttpSession session = request.getSession();
 		SessionBean sessionBean = (SessionBean)session.getAttribute("sessionBean");
-
+		MsgBean msgobj = new MsgBean();
+		String param = "";
+		int index = 0;
+		String action = "";
+		int recipeId = 0;
+		
         RequestDispatcher rd = null;
         try {
         //get action and recipe id
-		String param = (String)request.getParameter("actionAndrecipeid");
-        int index = param.indexOf(",");
-        String action = param.substring(0,index);
-        sessionBean.setcurrentRecipeId(Integer.valueOf(param.substring(index+1)));
+		param = (String)request.getParameter("actionAndrecipeid");
+        index = param.indexOf(",");
+        action = param.substring(0,index);
+              
+        recipeId=Integer.valueOf(param.substring(index+1));
+        
+        sessionBean.setcurrentRecipeId(recipeId);
         
         //get recipe detail object
         RecipeDetailBean recipeobj = new RecipeDetailBean();
@@ -120,10 +129,9 @@ public class RecipeServlet extends HttpServlet {
 	                + Arrays.asList(e.getStackTrace())
 	                .stream()
 	                .map(Objects::toString)
-	                .collect(Collectors.joining("\n"))
-/* */
-			, e
+	                .collect(Collectors.joining("\n")), e
 	        );
+	        msgobj.setMessage(param + ":" + action + ":" + index + ":" + recipeId );
 	    }
         finally {
             rd=request.getRequestDispatcher("listrecipe.jsp");
