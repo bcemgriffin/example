@@ -116,15 +116,19 @@ public class RecipeServlet extends HttpServlet {
         }
 	    catch (Exception e) {
 	        LOGGER.log(Level.SEVERE, "Caught exception while in doPost. Please investigate: " 
-/*	                + e 
+	                + e 
 	                + Arrays.asList(e.getStackTrace())
 	                .stream()
 	                .map(Objects::toString)
 	                .collect(Collectors.joining("\n"))
-*/
+/* */
 			, e
 	        );
 	    }
+        finally {
+            rd=request.getRequestDispatcher("listrecipe.jsp");
+            rd.forward(request, response);
+        }
 
 	}
 
