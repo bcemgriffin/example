@@ -7,6 +7,7 @@
 <%@ page import="beans.IngredientBean"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.net.InetAddress" %>
+<%@ page import="beans.MsgBean"%>
 
 <%
 RecipeDetailBean recipeobj = new RecipeDetailBean();
@@ -16,6 +17,14 @@ ArrayList<IngredientBean> ingredientlistobj = recipeobj.getIngredientlist();
 pageContext.setAttribute("ingredientlist", ingredientlistobj);
 String node=InetAddress.getLocalHost().getHostName();
 pageContext.setAttribute("node", node);
+
+MsgBean msgobj = new MsgBean();
+msgobj=(MsgBean)request.getAttribute("msgBean");
+pageContext.setAttribute("msg", msgobj);
+
+String sessId = session.getId();
+pageContext.setAttribute("sessid", sessId);
+
 %>
 <html>
 <head>
@@ -53,6 +62,8 @@ pageContext.setAttribute("node", node);
     </div>
     
     <div class="header">
+  	  <c:out value="${msg.message}"/> 
+  	  <c:out value="${sessid}"/>
     </div>
 
     <div class="sidebar">
