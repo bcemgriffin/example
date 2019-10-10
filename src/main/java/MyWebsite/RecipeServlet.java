@@ -55,7 +55,12 @@ public class RecipeServlet extends HttpServlet {
 		LOGGER.info("Logger Name: "+LOGGER.getName());
 		// get session attributes
 		HttpSession session = request.getSession();
-		SessionBean sessionBean = (SessionBean)session.getAttribute("sessionBean");
+		SessionBean sessionBean = (SessionBean) session.getAttribute("sessionBean");
+		if (sessionBean == null) {
+			sessionBean = new SessionBean();
+			session.setAttribute("sessionBean", sessionBean);
+		}
+		
 		MsgBean msgobj = new MsgBean();
 		String param = "";
 		int index = 0;
@@ -135,7 +140,7 @@ public class RecipeServlet extends HttpServlet {
 	                .map(Objects::toString)
 	                .collect(Collectors.joining("\n")), e
 	        );
-	        msgobj.setMessage(param + ":" + action + ":" + index + ":" + recipeId + ":" + place + ":" + session + ":" + sessionBean);
+	        msgobj.setMessage(place + ":" + session.getId() + ":" + session + ":" + sessionBean);
 	         
 	    }
         finally {

@@ -20,6 +20,9 @@ MsgBean msgobj = new MsgBean();
 msgobj=(MsgBean)request.getAttribute("msgBean");
 pageContext.setAttribute("msg", msgobj);
 
+String sessId = session.getId();
+pageContext.setAttribute("sessid", sessId);
+
 %>
 
 <!DOCTYPE html>
@@ -62,6 +65,7 @@ td {
     
     <div class="header">
      	<c:out value="${msg.message}"/> 
+     	<c:out value="${sessid}"/>
     </div>
     
     <div class="search">
