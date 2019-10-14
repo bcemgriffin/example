@@ -89,14 +89,17 @@ public class RecipeServlet extends HttpServlet {
 /*		param = (String)request.getParameter("actionAndrecipeid");
         index = param.indexOf(",");*/
         action = request.getParameter("action");              
-        recipeId=Integer.valueOf(request.getParameter("recipeid"));
+        
 
-        //Save Recipe ID in the session data
-        sessionBean.setcurrentRecipeId(recipeId);
+
         
         RecipeDataService recipeService = new RecipeDataService();
         
         if (action.equals("Edit")) {
+        	recipeId=Integer.valueOf(request.getParameter("recipeid"));
+            //Save Recipe ID in the session data
+            sessionBean.setcurrentRecipeId(recipeId);
+            
             //get recipe detail object
             RecipeDetailBean recipeobj = recipeService.getRecipeDetails(recipeId);  
         	request.setAttribute("recipeDetailBean",recipeobj);        	
@@ -104,6 +107,10 @@ public class RecipeServlet extends HttpServlet {
             rd.forward(request, response);
             
         } else if (action.equals("Show")) {
+        	recipeId=Integer.valueOf(request.getParameter("recipeid"));
+            //Save Recipe ID in the session data
+            sessionBean.setcurrentRecipeId(recipeId);
+            
             //get recipe detail object
             RecipeDetailBean recipeobj = recipeService.getRecipeDetails(recipeId);            
         	request.setAttribute("recipeDetailBean",recipeobj);
@@ -111,6 +118,9 @@ public class RecipeServlet extends HttpServlet {
             rd.forward(request, response);
             
         } else if (action.equals("Delete")) {
+        	recipeId=Integer.valueOf(request.getParameter("recipeid"));
+            //Save Recipe ID in the session data
+            sessionBean.setcurrentRecipeId(recipeId);
         	int rc=recipeService.deleteRecipe(recipeId);
         }
             
