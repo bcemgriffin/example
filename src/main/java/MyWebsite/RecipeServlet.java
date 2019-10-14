@@ -55,14 +55,24 @@ public class RecipeServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		LOGGER.info("Logger Name: "+LOGGER.getName());
 		
+        // Set default values
+        String filterValue = "";
+        int currentPage = 1;
+        int recordsPerPage=10;
+        
 		// get session attributes
 		HttpSession session = request.getSession();
 
 		SessionBean sessionBean = (SessionBean) session.getAttribute("sessionBean");
-	/*	if (sessionBean == null) {
+		if (sessionBean == null) {
 			sessionBean = new SessionBean();
 			session.setAttribute("sessionBean", sessionBean);
-		}*/
+			
+	        // Save default values in session
+			sessionBean.setFilterValue(filterValue);
+			sessionBean.setCurrentPage(currentPage);
+			sessionBean.setRecordsPerPage(recordsPerPage);
+		}
 		
 		MsgBean msgobj = new MsgBean();
     	request.setAttribute("msgBean", msgobj);    	
