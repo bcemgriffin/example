@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -53,8 +54,17 @@ public class RecipeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		LOGGER.info("Logger Name: "+LOGGER.getName());
+		
 		// get session attributes
 		HttpSession session = request.getSession();
+		if (request.getParameter("JSESSIONID") != null) {
+		    Cookie userCookie = new Cookie("JSESSIONID", request.getParameter("JSESSIONID"));
+		    response.addCookie(userCookie);
+		} else {
+		    String sessionId = session.getId();
+		    Cookie userCookie = new Cookie("JSESSIONID", sessionId);
+		    response.addCookie(userCookie);
+		}
 		SessionBean sessionBean = (SessionBean) session.getAttribute("sessionBean");
 		if (sessionBean == null) {
 			sessionBean = new SessionBean();
@@ -62,6 +72,8 @@ public class RecipeServlet extends HttpServlet {
 		}
 		
 		MsgBean msgobj = new MsgBean();
+    	request.setAttribute("msgBean", msgobj);    	
+    	
 		String param = "";
 		int index = 0;
 		String action = "";
@@ -76,61 +88,43 @@ public class RecipeServlet extends HttpServlet {
         action = param.substring(0,index);
               
         recipeId=Integer.valueOf(param.substring(index+1));
-        place = "After getting action and id";
         sessionBean.setcurrentRecipeId(recipeId);
-        place = "After setCurrentRecipeId";
         
-        //get recipe detail object
-        RecipeDetailBean recipeobj = new RecipeDetailBean();
-        place = "After instantiating recipe detail bean";
         RecipeDataService recipeService = new RecipeDataService();
-        place = "After instantiating recipe service";
-        recipeobj = recipeService.getRecipeDetails(sessionBean.getcurrentRecipeId());
-        place = "After getting recipe details";
+        
         if (action.equals("Edit")) {
-        	request.setAttribute("recipeDetailBean",recipeobj);
+            //get recipe detail object
+            RecipeDetailBean recipeobj = recipeService.getRecipeDetails(recipeId);  
+        	request.setAttribute("recipeDetailBean",recipeobj);        	
         	rd=request.getRequestDispatcher("editrecipe.jsp");
             rd.forward(request, response);
+            
         } else if (action.equals("Show")) {
+            //get recipe detail object
+            RecipeDetailBean recipeobj = recipeService.getRecipeDetails(recipeId);            
         	request.setAttribute("recipeDetailBean",recipeobj);
             rd=request.getRequestDispatcher("showrecipe.jsp");
             rd.forward(request, response);
+            
         } else if (action.equals("Delete")) {
-        	int rc=recipeService.deleteRecipe(sessionBean.getcurrentRecipeId());
-            ArrayList<RecipeBean> recipelistobj = new ArrayList<RecipeBean>();
-            recipelistobj = recipeService.findRecipes(sessionBean.getCurrentPage(), sessionBean.getRecordsPerPage(), sessionBean.getFilterValue());
-            
-            int rows = recipeService.getNumberOfRows(sessionBean.getFilterValue());
-            int noOfPages = rows / sessionBean.recordsPerPage;
-            
-            if (noOfPages % sessionBean.recordsPerPage > 0) {
-                noOfPages++;
-            }
-            
-            sessionBean.setnoOfPages(noOfPages);
-            sessionBean.setRecipeListObj(recipelistobj);
-            rd=request.getRequestDispatcher("listrecipe.jsp");
-            rd.forward(request, response);      
-        }else if (action.equals("List")) {
-            ArrayList<RecipeBean> recipelistobj = new ArrayList<RecipeBean>();
-            recipelistobj = recipeService.findRecipes(sessionBean.getCurrentPage(), sessionBean.getRecordsPerPage(), sessionBean.getFilterValue());
-            
-            int rows = recipeService.getNumberOfRows(sessionBean.getFilterValue());
-            int noOfPages = rows / sessionBean.recordsPerPage;
-            
-            if (noOfPages % sessionBean.recordsPerPage > 0) {
-                noOfPages++;
-            }
-            
-            sessionBean.setnoOfPages(noOfPages);
-            sessionBean.setRecipeListObj(recipelistobj);
-            rd=request.getRequestDispatcher("listrecipe.jsp");
-            rd.forward(request, response);      
-        } else {
-            rd=request.getRequestDispatcher("listrecipe.jsp");
-            rd.forward(request, response);
+        	int rc=recipeService.deleteRecipe(recipeId);
         }
-     
+            
+        ArrayList<RecipeBean> recipelistobj = new ArrayList<RecipeBean>();
+        recipelistobj = recipeService.findRecipes(sessionBean.getCurrentPage(), sessionBean.getRecordsPerPage(), sessionBean.getFilterValue());
+            
+        int rows = recipeService.getNumberOfRows(sessionBean.getFilterValue());
+        int noOfPages = rows / sessionBean.recordsPerPage;
+        
+        if (noOfPages % sessionBean.recordsPerPage > 0) {
+            noOfPages++;
+        }
+        
+        sessionBean.setnoOfPages(noOfPages);
+        sessionBean.setRecipeListObj(recipelistobj);
+        rd=request.getRequestDispatcher("listrecipe.jsp");
+        rd.forward(request, response);      
+             
         }
 	    catch (Exception e) {
 	        LOGGER.log(Level.SEVERE, "Caught exception while in doPost. Please investigate: " 
@@ -144,7 +138,7 @@ public class RecipeServlet extends HttpServlet {
 	         
 	    }
         finally {
-        	request.setAttribute("msgBean", msgobj);
+
             rd=request.getRequestDispatcher("listrecipe.jsp");
             rd.forward(request, response);
         }
