@@ -70,7 +70,7 @@ td {
     
     <div class="search">
        <div class="search-container">
-     	<form method="post" action="ReadRecipesServlet">
+     	<form method="post" action="RecipeServlet">
             <input type="text" name="filterValue" value="${sessionbean.filterValue}">
             <button type="submit"><i class="fa fa-search"></i></button>
         </form>    
@@ -78,7 +78,7 @@ td {
     </div>
     
     <div class="sidebar">
-        <a class="active" href="ReadRecipesServlet?recordsPerPage=${recordsPerPage}&currentPage=1&filterValue=${filterValue}">List Recipes</a>
+        <a class="active" href="RecipeServlet?recordsPerPage=${recordsPerPage}&currentPage=1&filterValue=${filterValue}">List Recipes</a>
         <a href="addrecipe.jsp">Add Recipe</a>
     </div>
     
@@ -91,7 +91,7 @@ td {
         		<table style="width:100%">
            			<c:forEach var="recipe" items="${sessionbean.recipeListObj}">
      	   		   		<tr>
-     	      	    		<td class="recipe-item"><a href="RecipeServlet?actionAndrecipeid=Show,${recipe.getId()}">${recipe.getName()} </a></td>
+     	      	    		<td class="recipe-item"><a href="RecipeServlet?action=Show&recipeid=${recipe.getId()}">${recipe.getName()} </a></td>
        	     			</tr>
        	    		</c:forEach>
         		</table>
@@ -104,7 +104,7 @@ td {
         <ul class="pagination" style="margin-top: 8px; margin-bottom: 8px;">
         	<c:if test="${sessionbean.currentPage > 1}">
             	<li class="nav-item">
-            		<a class="page-link" href="ReadRecipesServlet?recordsPerPage=${sessionbean.recordsPerPage}&currentPage=${sessionbean.currentPage-1}&filterValue=${filterValue}"><<</a>
+            		<a class="page-link" href="RecipeServlet?recordsPerPage=${sessionbean.recordsPerPage}&currentPage=${sessionbean.currentPage-1}&filterValue=${filterValue}"><<</a>
             	</li>
         	</c:if>
 
@@ -117,7 +117,7 @@ td {
                 	</c:when>
                 	<c:otherwise>
                 		<li class="nav-item">
-                			<a class="page-link" href="ReadRecipesServlet?recordsPerPage=${sessionbean.recordsPerPage}&currentPage=${i}&filterValue=${filterValue}">${i}</a>
+                			<a class="page-link" href="RecipeServlet?recordsPerPage=${sessionbean.recordsPerPage}&currentPage=${i}&filterValue=${filterValue}">${i}</a>
 						</li>
 					</c:otherwise>
 				</c:choose>
@@ -125,7 +125,7 @@ td {
 
         	<c:if test="${sessionbean.currentPage lt sessionbean.noOfPages}">
             	<li class="nav-item">
-            		<a class="page-link" href="ReadRecipesServlet?recordsPerPage=${sessionbean.recordsPerPage}&currentPage=${sessionbean.currentPage+1}&filterValue=${filterValue}">>></a>
+            		<a class="page-link" href="RecipeServlet?recordsPerPage=${sessionbean.recordsPerPage}&currentPage=${sessionbean.currentPage+1}&filterValue=${filterValue}">>></a>
             	</li>
         	</c:if>  
 		</ul>	    

@@ -57,25 +57,18 @@ public class RecipeServlet extends HttpServlet {
 		
 		// get session attributes
 		HttpSession session = request.getSession();
-		if (request.getParameter("JSESSIONID") != null) {
-		    Cookie userCookie = new Cookie("JSESSIONID", request.getParameter("JSESSIONID"));
-		    response.addCookie(userCookie);
-		} else {
-		    String sessionId = session.getId();
-		    Cookie userCookie = new Cookie("JSESSIONID", sessionId);
-		    response.addCookie(userCookie);
-		}
+
 		SessionBean sessionBean = (SessionBean) session.getAttribute("sessionBean");
-		if (sessionBean == null) {
+	/*	if (sessionBean == null) {
 			sessionBean = new SessionBean();
 			session.setAttribute("sessionBean", sessionBean);
-		}
+		}*/
 		
 		MsgBean msgobj = new MsgBean();
     	request.setAttribute("msgBean", msgobj);    	
     	
-		String param = "";
-		int index = 0;
+//		String param = "";
+//		int index = 0;
 		String action = "";
 		int recipeId = 0;
 		String place = "";
@@ -83,11 +76,12 @@ public class RecipeServlet extends HttpServlet {
         RequestDispatcher rd = null;
         try {
         //get action and recipe id
-		param = (String)request.getParameter("actionAndrecipeid");
-        index = param.indexOf(",");
-        action = param.substring(0,index);
-              
-        recipeId=Integer.valueOf(param.substring(index+1));
+/*		param = (String)request.getParameter("actionAndrecipeid");
+        index = param.indexOf(",");*/
+        action = request.getParameter("action");              
+        recipeId=Integer.valueOf(request.getParameter("recipeid"));
+
+        //Save Recipe ID in the session data
         sessionBean.setcurrentRecipeId(recipeId);
         
         RecipeDataService recipeService = new RecipeDataService();
