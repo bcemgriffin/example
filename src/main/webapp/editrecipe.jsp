@@ -5,8 +5,12 @@
 <%@ page import="beans.RecipeDetailBean"%>
 <%@ page import="beans.IngredientBean"%>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="beans.SessionBean"%>
 
 <%
+SessionBean sessionBean = (SessionBean)session.getAttribute("sessionBean");
+pageContext.setAttribute("sessionbean", sessionBean);
+
 RecipeDetailBean recipeobj = new RecipeDetailBean();
 recipeobj=(RecipeDetailBean)request.getAttribute("recipeDetailBean");
 pageContext.setAttribute("recipe", recipeobj);
@@ -84,7 +88,7 @@ select {
     <div class="header"></div>
 
     <div class="sidebar">
-        <a href="ReadRecipesServlet?recordsPerPage=10&currentPage=1&filterValue=">List Recipes</a>
+        <a href="RecipeServlet?action=List&recordsPerPage=${sessionBean.recordsPerPage}&currentPage=1&filterValue=${sessionBean.filterValue}">List Recipes</a>
         <a href="addrecipe.jsp">Add Recipe</a>
         <a class="active" href="#editrecipe">Edit Recipe</a>
     </div>

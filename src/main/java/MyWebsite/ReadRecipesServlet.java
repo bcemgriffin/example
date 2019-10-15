@@ -39,16 +39,12 @@ public class ReadRecipesServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		HttpSession session = request.getSession();
-        MsgBean msgobj = new MsgBean();
+      
+		MsgBean msgobj = new MsgBean();
         request.setAttribute("msgBean",msgobj);
             
         SessionBean sessionBean = (SessionBean) session.getAttribute("sessionBean");
-        
-        String filterValue = "";
-        int currentPage = 1;
-        int recordsPerPage=10;
-        
-        if (sessionBean != null) {
+/*        if (sessionBean != null) {
         	filterValue = sessionBean.getFilterValue();
         	currentPage = sessionBean.getCurrentPage();
         	recordsPerPage = sessionBean.getRecordsPerPage();
@@ -56,6 +52,18 @@ public class ReadRecipesServlet extends HttpServlet {
         	sessionBean = new SessionBean();
         	session.setAttribute("sessionBean", sessionBean);
         }
+*/
+        if (sessionBean == null) {
+        	sessionBean = new SessionBean();
+        	session.setAttribute("sessionBean", sessionBean);
+        }
+        
+        // Set default values
+        String filterValue = "";
+        int currentPage = 1;
+        int recordsPerPage=10;
+        
+        //Get parameter values
         if (request.getParameter("filterValue") != null) {
         	filterValue = request.getParameter("filterValue");
         }
@@ -75,6 +83,7 @@ public class ReadRecipesServlet extends HttpServlet {
             noOfPages++;
         }
         
+        //save data to send back to JSP
         sessionBean.setCurrentPage(currentPage);
         sessionBean.setRecordsPerPage(recordsPerPage);
         sessionBean.setnoOfPages(noOfPages);

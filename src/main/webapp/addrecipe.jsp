@@ -5,7 +5,12 @@
 <%@ page import="beans.RecipeDetailBean"%>
 <%@ page import="beans.IngredientBean"%>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="beans.SessionBean"%>
+
 <%
+SessionBean sessionBean = (SessionBean)session.getAttribute("sessionBean");
+pageContext.setAttribute("sessionbean", sessionBean);
+
 String[] fractions = {"", "1/8", "1/4", "1/3", "1/2", "2/3", "3/4"};
 pageContext.setAttribute("fractionsList", fractions);
 
@@ -70,7 +75,7 @@ select {
     <div class="header"></div>
 
     <div class="sidebar">
-        <a href="ReadRecipesServlet?recordsPerPage=10&currentPage=1&filterValue=">List Recipes</a>
+        <a href="RecipeServlet?action=List&recordsPerPage=${sessionBean.recordsPerPage}&currentPage=1&filterValue=${sessionBean.filterValue}">List Recipes</a>
         <a class="active" href="#addrecipe">Add Recipe</a>
     </div>
         
