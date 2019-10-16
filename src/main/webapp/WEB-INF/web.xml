@@ -15,31 +15,7 @@
   <servlet>
     <servlet-name>RecipeServlet</servlet-name>
     <servlet-class>MyWebsite.RecipeServlet</servlet-class>
-    <display-name>RecipeServlet</display-name>
   	<description></description>
-  </servlet>
-
-  
-  <servlet>
-    <servlet-name>ReadRecipesServlet</servlet-name>
-    <servlet-class>MyWebsite.ReadRecipesServlet</servlet-class>
-    <description></description>
-    <display-name>ReadRecipesServlet</display-name>
-  </servlet>
-
-  
-  <servlet>
-    <servlet-name>ReadRecipeDetailsServlet</servlet-name>
-    <servlet-class>MyWebsite.ReadRecipeDetailsServlet</servlet-class>
-    <description></description>
-    <display-name>ReadRecipeDetailsServlet</display-name>
-  </servlet>
-
-  <servlet>
-    <servlet-name>UpdateRecipeDetailsServlet</servlet-name>
-    <servlet-class>MyWebsite.UpdateRecipeDetailsServlet</servlet-class>
-    <description></description>
-    <display-name>UpdateRecipeDetailsServlet</display-name>
   </servlet>
 
 </web-app>

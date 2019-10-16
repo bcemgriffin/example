@@ -4,17 +4,24 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <%@ page isELIgnored="false" %> 
 <%@ page import="beans.RecipeDetailBean"%>
+<%@ page import="beans.SessionBean"%>
 <%@ page import="beans.IngredientBean"%>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.lang.String" %>
 <%@ page import="java.net.InetAddress" %>
 <%@ page import="beans.MsgBean"%>
 
 <%
+SessionBean sessionBean = (SessionBean)session.getAttribute("sessionBean");
+pageContext.setAttribute("sessionbean", sessionBean);
+
 RecipeDetailBean recipeobj = new RecipeDetailBean();
 recipeobj=(RecipeDetailBean)request.getAttribute("recipeDetailBean");
 pageContext.setAttribute("recipe", recipeobj);
+
 ArrayList<IngredientBean> ingredientlistobj = recipeobj.getIngredientlist();
 pageContext.setAttribute("ingredientlist", ingredientlistobj);
+
 String node=InetAddress.getLocalHost().getHostName();
 pageContext.setAttribute("node", node);
 
@@ -67,10 +74,10 @@ pageContext.setAttribute("sessid", sessId);
     </div>
 
     <div class="sidebar">
-        <a href="ReadRecipesServlet?recordsPerPage=10&currentPage=1&">List Recipes</a>
+        <a href="RecipeServlet?action=List&recordsPerPage=${sessionBean.recordsPerPage}&currentPage=1&filterValue=${sessionBean.filterValue}">List Recipes</a>
         <a href="addrecipe.jsp">Add Recipe</a>
         <a class="active" href="#showrecipe">Show Recipe</a>
-        <a href="RecipeServlet?actionAndrecipeid=Edit,${recipe.getId()}">Edit Recipe</a>
+        <a href="RecipeServlet?action=Edit&recipeid=${recipe.getId()}">Edit Recipe</a>
     </div>
     
     <div class="content">
@@ -145,10 +152,14 @@ pageContext.setAttribute("sessid", sessId);
 		 		 		<div class="contentvscroll">
 				 				${recipe.getDirections()}
 	 	 				</div>
+	 	 				<input type="hidden" name="recipeid" value="${recipe.getId()}">
+	 	 				<input type="hidden" name="filterValue" value="${sessionbean.filterValue}">
+            			<input type="hidden" name="currentPage" value="${sessionbean.currentPage}">
+     					<input type="hidden" name="recordsPerPage" value="${sessionbean.recordsPerPage}">
 	 	 				<button style="width:60px" onclick="printDiv('printMe')">Print</button>
-	 	 				<button style="width:60px" type="submit" name="actionAndrecipeid" value="List,0">Cancel</button>
-				 		<button style="width:60px" type="submit" name="actionAndrecipeid" value="Edit,${recipe.getId()}">Edit</button>
-				 		<button style="width:60px" type="submit" name="actionAndrecipeid" value="Delete,${recipe.getId()}">Delete</button>
+	 	 				<button style="width:60px" type="submit" name="action" value="List">Cancel</button>
+				 		<button style="width:60px" type="submit" name="action" value="Edit">Edit</button>
+				 		<button style="width:60px" type="submit" name="action" value="Delete">Delete</button>
 				 	</div>
 			 		<div class="content3p">
 			 			<h3>Directions</h3>

@@ -5,14 +5,14 @@
 
 <%
 MsgBean msgobj = new MsgBean();
-if ( request.getAttribute("msgBean") == null ) {
-	msgobj.setMessage("Please Enter Credentials");
-} else {
-	msgobj=(MsgBean)request.getAttribute("msgBean");
-}
+session.setAttribute("msgBean", msgobj);
 
 SessionBean sessionBean = new SessionBean();
 session.setAttribute("sessionBean", sessionBean);
+sessionBean.setCurrentPage(0);
+sessionBean.setRecordsPerPage(10);
+sessionBean.setFilterValue("");
+sessionBean.setnoOfPages(0);
 
 %>
 
@@ -23,8 +23,10 @@ session.setAttribute("sessionBean", sessionBean);
         <title>My Website</title>
     </head>
     <body bgcolor="white">
-         <!--
+         
      <c:redirect url="listrecipe.jsp"/>
+     
+     <!--
 
     <c:set var="currentPage" scope="session" value="0"/>
     <c:set var="recordsPerPage" scope="session" value="10"/>
@@ -32,7 +34,7 @@ session.setAttribute("sessionBean", sessionBean);
     <c:set var="noOfPages" scope="session" value="0"/>
     <c:redirect url="listrecipe.jsp"/>
 
-     	<form method="post" action="ReadRecipesServlet">		
+     	<form method="post" action="RecipeServlet">		
      		<input type="hidden" name="currentPage" value="0">
      		<input type="hidden" name="recordsPerPage" value="10">
      		<input type="hidden" name="filterValue" value="pie">

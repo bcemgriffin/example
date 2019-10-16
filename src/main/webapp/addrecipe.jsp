@@ -5,7 +5,12 @@
 <%@ page import="beans.RecipeDetailBean"%>
 <%@ page import="beans.IngredientBean"%>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="beans.SessionBean"%>
+
 <%
+SessionBean sessionBean = (SessionBean)session.getAttribute("sessionBean");
+pageContext.setAttribute("sessionbean", sessionBean);
+
 String[] fractions = {"", "1/8", "1/4", "1/3", "1/2", "2/3", "3/4"};
 pageContext.setAttribute("fractionsList", fractions);
 
@@ -70,12 +75,12 @@ select {
     <div class="header"></div>
 
     <div class="sidebar">
-        <a href="ReadRecipesServlet?recordsPerPage=10&currentPage=1&filterValue=">List Recipes</a>
+        <a href="RecipeServlet?action=List&recordsPerPage=${sessionBean.recordsPerPage}&currentPage=1&filterValue=${sessionBean.filterValue}">List Recipes</a>
         <a class="active" href="#addrecipe">Add Recipe</a>
     </div>
         
    	<div class="content">
-  	 	<form method="post" action="AddRecipeDetailsServlet" enctype = "multipart/form-data">
+  	 	<form method="post" action="RecipeServlet" enctype = "multipart/form-data">
    	 		<table style="border: 1px solid black; width: 100%;">
    	 			<tr style="border: none;">
    	 				<th style="width:40%; border: none;"><h2>Recipe Details</h2></td>
@@ -151,7 +156,9 @@ select {
 			<textarea id="directions" name="recipeDirections"></textarea>
 			<script>
 				CKEDITOR.replace( 'directions' );
-			</script>			
+			</script>
+			<input type="hidden" name="action" value="Add">		
+			<input type="hidden" name="recipeid" value="0">
 			<button type="submit">Save</button>
 		</form>
 	</div>

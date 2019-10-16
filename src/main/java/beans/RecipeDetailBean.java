@@ -106,6 +106,12 @@ public class RecipeDetailBean implements Serializable {
 	public void setPhotoName(String photoName) {
 		this.photoName = photoName;
 	}
+	@Override
+	public String toString() {
+		return "RecipeDetailBean [Id=" + Id + ", Name=" + Name + ", yield=" + yield + ", yieldunit=" + yieldunit
+				+ ", preptime=" + preptime + ", cooktime=" + cooktime + ", directions=" + directions + ", photoName="
+				+ photoName + ", photo=" + photo + ", photoIS=" + photoIS + ", ingredientlist=" + ingredientlist + "]";
+	}
 
 }
 

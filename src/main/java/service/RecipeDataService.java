@@ -206,7 +206,6 @@ public class RecipeDataService {
     	    	
     	try {
     		Class.forName("com.mysql.jdbc.Driver");
-//    		con = DriverManager.getConnection("jdbc:mysql://mysql.griffin.local:3306/MyWebsite", "admin", "mysqladmin123");
     		
     		envContext = new InitialContext();
     		DataSource ds = (DataSource)envContext.lookup("java:/comp/env/jdbc/recipeDB");
@@ -289,38 +288,41 @@ public class RecipeDataService {
     	Context envContext = null;
     	Connection con = null;
     	PreparedStatement ps = null;
-    	Statement stmt = null;
     	
     	int recipeId = 100;
-    	
     	    	
     	try {
     		Class.forName("com.mysql.jdbc.Driver");
-//    		con = DriverManager.getConnection("jdbc:mysql://mysql.griffin.local:3306/MyWebsite", "admin", "mysqladmin123");
     		
     		envContext = new InitialContext();
     		DataSource ds = (DataSource)envContext.lookup("java:/comp/env/jdbc/recipeDB");
     		con = ds.getConnection();
     		
-    		String sql="";
-    		
-    		stmt=con.createStatement();
     		if (recipe.getPhotoName().isEmpty()) {
-	    		sql="insert into RECIPE (name, yield, yield_unit, prep_time, cook_time, directions) values ('" + recipe.getName() + "', " + recipe.getYield() + ", '" + recipe.getYieldunit() + "', '" + recipe.getPreptime() + "', '" + recipe.getCooktime() + "', '" + recipe.getDirections() + "')";
+    			ps=con.prepareStatement("insert into RECIPE (name, yield, yield_unit, prep_time, cook_time, directions) values (?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);    			
+	    		ps.setString(1,recipe.getName());
+    			ps.setInt(2,recipe.getYield());
+	    		ps.setString(3,recipe.getYieldunit());
+	    		ps.setString(4,recipe.getPreptime());
+	    		ps.setString(5,recipe.getCooktime());
+	    		ps.setString(6,recipe.getDirections());
     		} else {
-	    		sql="insert into RECIPE (name, yield, yield_unit, prep_time, cook_time, directions, photo_name) values ('" + recipe.getName() + "', " + recipe.getYield() + ", '" + recipe.getYieldunit() + "', '" + recipe.getPreptime() + "', '" + recipe.getCooktime() + "', '" +  recipe.getDirections() + "', '" +  recipe.getPhotoName() + "')";
+    			ps=con.prepareStatement("insert into RECIPE (name, yield, yield_unit, prep_time, cook_time, directions, photo_name) values (?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);    			
+	    		ps.setString(1,recipe.getName());
+    			ps.setInt(2,recipe.getYield());
+	    		ps.setString(3,recipe.getYieldunit());
+	    		ps.setString(4,recipe.getPreptime());
+	    		ps.setString(5,recipe.getCooktime());
+	    		ps.setString(6,recipe.getDirections());
+	    		ps.setString(7,recipe.getPhotoName());
     		}
-    		ResultSet rs = stmt.getGeneratedKeys();
+
+    		ps.executeUpdate();
+    		ResultSet rs = ps.getGeneratedKeys();
     		if (rs != null && rs.next()) {
     		    recipeId = rs.getInt(1);
-    		}
-            
-            stmt.close();
-    		
-    		ps = con.prepareStatement("delete from INGREDIENT where recipe_id=?");
-    		ps.setInt(1,recipeId);
-            ps.executeUpdate();
-            ps.close();
+    		} 
+    		ps.close();
             
             ArrayList<IngredientBean> ingredientList = recipe.getIngredientlist();
             for (IngredientBean ingredient : ingredientList ) {
