@@ -94,4 +94,10 @@ public class IngredientBean implements Serializable {
 		
 		return amt;
 	}
+	@Override
+	public String toString() {
+		return "IngredientBean [ingredientAmt=" + ingredientAmt + ", ingredientAmtString1=" + ingredientAmtString1
+				+ ", ingredientAmtString2=" + ingredientAmtString2 + ", ingredientUnit=" + ingredientUnit
+				+ ", ingredientName=" + ingredientName + "]";
+	}
 }

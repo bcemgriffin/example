@@ -95,7 +95,7 @@ select {
     
     
    	<div class="content">
-  	 	<form method="post" action="UpdateRecipeDetailsServlet" enctype = "multipart/form-data">
+  	 	<form method="post" action="RecipeServlet" enctype = "multipart/form-data">
    	 		<table style="border: 1px solid black; width: 100%;">
    	 			<tr style="border: none;">
    	 				<th style="width:50%; border: none;"><h2>Recipe Details</h2></th>
@@ -181,6 +181,8 @@ select {
 			<script>
 				CKEDITOR.replace( 'directions' );
 			</script>
+			<input type="hidden" name="action" value="Update">	
+			<input type="hidden" name="recipeid" value="${recipe.getId()}">
 			<button type="submit">Save</button>
 		</form>
 	</div>
