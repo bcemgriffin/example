@@ -101,9 +101,6 @@ form {
             <a><button style="text-align:left;border:none;width:100%" type="submit" name="action" value="Show">Show Recipe</button></a>
         	<a class="active"><button class="active" style="text-align:left;border:none;width:100%" type="submit" name="action" value="Edit">Edit Recipe</button></a>
         </form>
-<%--         <a href="RecipeServlet?action=List&recordsPerPage=${sessionBean.recordsPerPage}&currentPage=1&filterValue=${sessionBean.filterValue}">List Recipes</a>
-        <a href="addrecipe.jsp">Add Recipe</a>
-        <a class="active" href="#editrecipe">Edit Recipe</a> --%>
     </div>
     
     
