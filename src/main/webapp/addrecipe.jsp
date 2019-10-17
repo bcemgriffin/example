@@ -60,7 +60,9 @@ select {
     border-radius: 1px;
 
 }
-
+form {
+    margin-block-end: 0em;
+}
 </style>
 </head>
 
@@ -75,8 +77,16 @@ select {
     <div class="header"></div>
 
     <div class="sidebar">
-        <a href="RecipeServlet?action=List&recordsPerPage=${sessionBean.recordsPerPage}&currentPage=1&filterValue=${sessionBean.filterValue}">List Recipes</a>
-        <a class="active" href="#addrecipe">Add Recipe</a>
+    	<form method="post" action="RecipeServlet">
+            <input type="hidden" name="filterValue" value="${sessionbean.filterValue}">
+            <input type="hidden" name="currentPage" value="${sessionbean.currentPage}">
+     		<input type="hidden" name="recordsPerPage" value="${sessionbean.recordsPerPage}">
+            <a><button style="text-align:left;border:none;width:100%" type="submit" name="action" value="List">List Recipes</button></a>
+            <a class="active"><button class="active" style="text-align:left;border:none;width:100%" type="submit" name="action" value="RouteToAddScreen">Add Recipe</button></a>
+        </form>
+        
+<%--         <a href="RecipeServlet?action=List&recordsPerPage=${sessionBean.recordsPerPage}&currentPage=1&filterValue=${sessionBean.filterValue}">List Recipes</a>
+        <a class="active" href="#addrecipe">Add Recipe</a> --%>
     </div>
         
    	<div class="content">
@@ -157,9 +167,9 @@ select {
 			<script>
 				CKEDITOR.replace( 'directions' );
 			</script>
-			<input type="hidden" name="action" value="Add">		
 			<input type="hidden" name="recipeid" value="0">
-			<button type="submit">Save</button>
+			<button type="submit" name="action" value="Add">Save</button>
+			<button type="submit" name="action" value="List">Cancel</button>
 		</form>
 	</div>
 	

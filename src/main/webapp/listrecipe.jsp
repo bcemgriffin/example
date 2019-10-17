@@ -32,9 +32,6 @@ pageContext.setAttribute("sessid", sessId);
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"> 
--->
     
 <title>Recipe Book - List</title>
 
@@ -50,9 +47,15 @@ th {
     font-size: 20px;
 }
 td {
-	padding: 3px;
+	padding: 0px;
 	font-size: 17px;
 }
+/* button {
+	background-color: white;
+}
+button:hover {
+	background-color: whitesmoke;
+} */
 </style>
     
 </head>
@@ -80,20 +83,28 @@ td {
     </div>
     
     <div class="sidebar">
-        <a class="active" href="RecipeServlet?action=List&recordsPerPage=${sessionBean.recordsPerPage}&currentPage=1&filterValue=${sessionBean.filterValue}">List Recipes</a>
-        <a href="addrecipe.jsp">Add Recipe</a>
+    	<form method="post" action="RecipeServlet">
+            <input type="hidden" name="filterValue" value="${sessionbean.filterValue}">
+            <input type="hidden" name="currentPage" value="${sessionbean.currentPage}">
+     		<input type="hidden" name="recordsPerPage" value="${sessionbean.recordsPerPage}">
+            <a class="active"><button class="active" style="text-align:left;border:none;width:100%" type="submit" name="action" value="List">List Recipes</button></a>
+            <a><button style="text-align:left;border:none;width:100%" type="submit" name="action" value="RouteToAddScreen">Add Recipe</button></a>
+        </form>
+<%--         <a class="active" href="RecipeServlet?action=List&recordsPerPage=${sessionBean.recordsPerPage}&currentPage=1&filterValue=${sessionBean.filterValue}">List Recipes</a>
+        <a href="addrecipe.jsp">Add Recipe</a> --%>
     </div>
     
     <div class="content">
         <c:if test="${sessionbean.currentPage == 0}">
-        	<h1>Welcome to My Recipe Book!</h1>
+        	<h2>No Recipes Found</h2>
         </c:if>
         <c:if test="${sessionbean.currentPage != 0}">
-  			<form method="post" action="RecipeServlet">
+  			<form method="post" action="RecipeServlet?action=Show">
         		<table style="width:100%">
            			<c:forEach var="recipe" items="${sessionbean.recipeListObj}">
      	   		   		<tr>
-     	      	    		<td class="recipe-item"><a href="RecipeServlet?action=Show&recipeid=${recipe.getId()}">${recipe.getName()} </a></td>
+     	      <!-- 	    		<td class="recipe-item"><a href="RecipeServlet?action=Show&recipeid=${recipe.getId()}">${recipe.getName()} </a></td> -->
+     	      	    		<td><button style="text-align:left;border:none;width:100%;background-color:white" type="submit" name="recipeid" value="${recipe.getId()}">${recipe.getName()}</button></td>
        	     			</tr>
        	    		</c:forEach>
         		</table>
