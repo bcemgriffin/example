@@ -60,6 +60,7 @@ public class RecipeServlet extends HttpServlet {
 		
 		MsgBean msgobj = new MsgBean();
     	request.setAttribute("msgBean", msgobj); 
+    	msgobj.setMessage("");
     	
 		// TODO Auto-generated method stub
 		LOGGER.info("Logger Name: "+LOGGER.getName());
@@ -115,6 +116,9 @@ public class RecipeServlet extends HttpServlet {
 	            sessionBean.setcurrentRecipeId(recipeId);
 	        	int rc=recipeService.deleteRecipe(recipeId);
 	            msgobj.setMessage("rc:" + rc);
+	            
+	        } else if (action.equals("RouteToAddScreen")) {      	
+	        	rd=request.getRequestDispatcher("addrecipe.jsp");
 	            
 	        } else if (action.equals("Add") || action.equals("Update")) {
 	        	String recipeName = request.getParameter("recipeName");
@@ -175,8 +179,15 @@ public class RecipeServlet extends HttpServlet {
 		        int rows = recipeService.getNumberOfRows(sessionBean.getFilterValue());
 		        sessionBean.setnoOfPages(((rows/sessionBean.getRecordsPerPage()) + (rows % sessionBean.getRecordsPerPage() > 0 ? 1 : 0)));
 		        
+		        
 		        if (sessionBean.getCurrentPage() > sessionBean.getnoOfPages()) {
 		        	sessionBean.setCurrentPage(sessionBean.getCurrentPage()-1);
+		        }
+		        if (sessionBean.getCurrentPage() == 0 && rows > 0) {
+		        	sessionBean.setCurrentPage(1);
+		        }
+		        if (rows == 0) {
+		        	msgobj.setMessage("No Recipes Found");
 		        }
 		        
 		        ArrayList<RecipeBean> recipelistobj = new ArrayList<RecipeBean>();
@@ -185,8 +196,7 @@ public class RecipeServlet extends HttpServlet {
 		        sessionBean.setRecipeListObj(recipelistobj);
 		        rd=request.getRequestDispatcher("listrecipe.jsp");
    
-		        msgobj.setMessage("CurrPg:" + sessionBean.getCurrentPage() + " noOfPg:" + sessionBean.getnoOfPages() + " Rows:" + rows);
-	        }	             
+	        }
         }
 	    catch (Exception e) {
 	        LOGGER.log(Level.SEVERE, "Caught exception while in doPost. Please investigate: " 
@@ -196,7 +206,7 @@ public class RecipeServlet extends HttpServlet {
 	                .map(Objects::toString)
 	                .collect(Collectors.joining("\n")), e
 	        );
-	        msgobj.setMessage(session.getId() + ":" + session + ":" + sessionBean);
+	        msgobj.setMessage("Exception Occured: " + session.getId() + ":" + sessionBean);
 	        
         	sessionBean.setCurrentPage(0);
             rd=request.getRequestDispatcher("listrecipe.jsp");

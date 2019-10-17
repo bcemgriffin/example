@@ -24,7 +24,7 @@ sessionBean.setnoOfPages(0);
     </head>
     <body bgcolor="white">
          
-     <c:redirect url="listrecipe.jsp"/>
+     <c:redirect url="/RecipeServlet"/>
      
      <!--
 
