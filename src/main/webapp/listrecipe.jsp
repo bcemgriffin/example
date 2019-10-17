@@ -97,7 +97,8 @@ button:hover {
         	<h2>No Recipes Found</h2>
         </c:if>
         <c:if test="${sessionbean.currentPage != 0}">
-  			<form method="post" action="RecipeServlet?action=Show">
+  			<form method="post" action="RecipeServlet">
+  				<input type="hidden" name="action" value="Show">
         		<table style="width:100%">
            			<c:forEach var="recipe" items="${sessionbean.recipeListObj}">
      	   		   		<tr>
