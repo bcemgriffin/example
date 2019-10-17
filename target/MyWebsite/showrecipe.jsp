@@ -38,10 +38,7 @@ pageContext.setAttribute("sessid", sessId);
 <meta charset="ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css">
-<!--
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"> 
--->
+
 <script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
 <script>
 		function printDiv(divName){
@@ -56,6 +53,9 @@ pageContext.setAttribute("sessid", sessId);
 <title>Recipe Details</title>
 
 <style>
+form {
+    margin-block-end: 0em;
+}
 </style>
    
 </head>
@@ -63,8 +63,7 @@ pageContext.setAttribute("sessid", sessId);
 <div class="grid">
     <div class="title">
         <div class="center">
-        <h1>Online Recipe Book</h1>
-      	<c:out value="hostName: ${node}" />
+        	<h1>Online Recipe Book</h1>
         </div>
     </div>
     
@@ -74,10 +73,16 @@ pageContext.setAttribute("sessid", sessId);
     </div>
 
     <div class="sidebar">
-        <a href="RecipeServlet?action=List&recordsPerPage=${sessionBean.recordsPerPage}&currentPage=1&filterValue=${sessionBean.filterValue}">List Recipes</a>
-        <a href="addrecipe.jsp">Add Recipe</a>
-        <a class="active" href="#showrecipe">Show Recipe</a>
-        <a href="RecipeServlet?action=Edit&recipeid=${recipe.getId()}">Edit Recipe</a>
+    	<form method="post" action="RecipeServlet">
+            <input type="hidden" name="filterValue" value="${sessionbean.filterValue}">
+            <input type="hidden" name="currentPage" value="${sessionbean.currentPage}">
+     		<input type="hidden" name="recordsPerPage" value="${sessionbean.recordsPerPage}">
+     		<input type="hidden" name="recipeid" value="${sessionbean.currentRecipeId}">
+            <a><button style="text-align:left;border:none;width:100%" type="submit" name="action" value="List">List Recipes</button></a>
+            <a><button style="text-align:left;border:none;width:100%" type="submit" name="action" value="RouteToAddScreen">Add Recipe</button></a>
+            <a class="active"><button class="active" style="text-align:left;border:none;width:100%" type="submit" name="action" name="action" value="Show">Show Recipe</button></a>
+        	<a><button style="text-align:left;border:none;width:100%" type="submit" name="action" value="Edit">Edit Recipe</button></a>
+        </form>
     </div>
     
     <div class="content">

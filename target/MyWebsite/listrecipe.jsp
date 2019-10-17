@@ -90,8 +90,6 @@ button:hover {
             <a class="active"><button class="active" style="text-align:left;border:none;width:100%" type="submit" name="action" value="List">List Recipes</button></a>
             <a><button style="text-align:left;border:none;width:100%" type="submit" name="action" value="RouteToAddScreen">Add Recipe</button></a>
         </form>
-<%--         <a class="active" href="RecipeServlet?action=List&recordsPerPage=${sessionBean.recordsPerPage}&currentPage=1&filterValue=${sessionBean.filterValue}">List Recipes</a>
-        <a href="addrecipe.jsp">Add Recipe</a> --%>
     </div>
     
     <div class="content">

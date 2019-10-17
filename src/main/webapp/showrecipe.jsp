@@ -38,10 +38,7 @@ pageContext.setAttribute("sessid", sessId);
 <meta charset="ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css">
-<!--
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"> 
--->
+
 <script src="https://cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
 <script>
 		function printDiv(divName){
@@ -86,11 +83,6 @@ form {
             <a class="active"><button class="active" style="text-align:left;border:none;width:100%" type="submit" name="action" name="action" value="Show">Show Recipe</button></a>
         	<a><button style="text-align:left;border:none;width:100%" type="submit" name="action" value="Edit">Edit Recipe</button></a>
         </form>
-        
-<%--         <a href="RecipeServlet?action=List&recordsPerPage=${sessionBean.recordsPerPage}&currentPage=1&filterValue=${sessionBean.filterValue}">List Recipes</a>
-        <a href="addrecipe.jsp">Add Recipe</a>
-        <a class="active" href="#showrecipe">Show Recipe</a>
-        <a href="RecipeServlet?action=Edit&recipeid=${recipe.getId()}">Edit Recipe</a> --%>
     </div>
     
     <div class="content">
