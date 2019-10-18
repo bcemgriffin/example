@@ -6,13 +6,16 @@
 <%@ page import="beans.IngredientBean"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="beans.SessionBean"%>
+<%@ page import="beans.MsgBean"%>
 
 <%
 SessionBean sessionBean = (SessionBean)session.getAttribute("sessionBean");
 pageContext.setAttribute("sessionbean", sessionBean);
 
-RecipeDetailBean recipeobj = new RecipeDetailBean();
-recipeobj=(RecipeDetailBean)request.getAttribute("recipeDetailBean");
+MsgBean msgobj=(MsgBean)request.getAttribute("msgBean");
+pageContext.setAttribute("msg", msgobj);
+
+RecipeDetailBean recipeobj=(RecipeDetailBean)request.getAttribute("recipeDetailBean");
 pageContext.setAttribute("recipe", recipeobj);
 
 ArrayList<IngredientBean> ingredientlistobj = recipeobj.getIngredientlist();
@@ -88,7 +91,9 @@ form {
        	<h1>Online Recipe Book</h1>
     </div>
     
-    <div class="header"></div>
+    <div class="header">
+    	<c:out value="${msg.message}"/>
+    </div>
 
     <div class="sidebar">
     	<form method="post" action="RecipeServlet">

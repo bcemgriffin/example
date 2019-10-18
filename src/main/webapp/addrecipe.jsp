@@ -6,10 +6,14 @@
 <%@ page import="beans.IngredientBean"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="beans.SessionBean"%>
+<%@ page import="beans.MsgBean"%>
 
 <%
 SessionBean sessionBean = (SessionBean)session.getAttribute("sessionBean");
 pageContext.setAttribute("sessionbean", sessionBean);
+
+MsgBean msgobj=(MsgBean)request.getAttribute("msgBean");
+pageContext.setAttribute("msg", msgobj);
 
 String[] fractions = {"", "1/8", "1/4", "1/3", "1/2", "2/3", "3/4"};
 pageContext.setAttribute("fractionsList", fractions);
@@ -74,7 +78,7 @@ form {
         </div>
     </div>
     
-    <div class="header"></div>
+    <div class="header"><c:out value="${msg.message}"/></div>
 
     <div class="sidebar">
     	<form method="post" action="RecipeServlet">

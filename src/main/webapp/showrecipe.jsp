@@ -15,8 +15,7 @@
 SessionBean sessionBean = (SessionBean)session.getAttribute("sessionBean");
 pageContext.setAttribute("sessionbean", sessionBean);
 
-RecipeDetailBean recipeobj = new RecipeDetailBean();
-recipeobj=(RecipeDetailBean)request.getAttribute("recipeDetailBean");
+RecipeDetailBean recipeobj=(RecipeDetailBean)request.getAttribute("recipeDetailBean");
 pageContext.setAttribute("recipe", recipeobj);
 
 ArrayList<IngredientBean> ingredientlistobj = recipeobj.getIngredientlist();
@@ -25,8 +24,7 @@ pageContext.setAttribute("ingredientlist", ingredientlistobj);
 String node=InetAddress.getLocalHost().getHostName();
 pageContext.setAttribute("node", node);
 
-MsgBean msgobj = new MsgBean();
-msgobj=(MsgBean)request.getAttribute("msgBean");
+MsgBean msgobj=(MsgBean)request.getAttribute("msgBean");
 pageContext.setAttribute("msg", msgobj);
 
 String sessId = session.getId();
@@ -69,7 +67,7 @@ form {
     
     <div class="header">
   	  <c:out value="${msg.message}"/> 
-  	  <c:out value="${sessid}"/>
+<%--   	  <c:out value="${sessid}"/> --%>
     </div>
 
     <div class="sidebar">

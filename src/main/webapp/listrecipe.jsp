@@ -12,12 +12,10 @@
 SessionBean sessionBean = (SessionBean)session.getAttribute("sessionBean");
 pageContext.setAttribute("sessionbean", sessionBean);
 
-ArrayList<RecipeBean> recipelistobj = new ArrayList<RecipeBean>();
-recipelistobj=(ArrayList<RecipeBean>)session.getAttribute("recipeListBean");
+ArrayList<RecipeBean> recipelistobj=(ArrayList<RecipeBean>)session.getAttribute("recipeListBean");
 pageContext.setAttribute("list", recipelistobj);
 
-MsgBean msgobj = new MsgBean();
-msgobj=(MsgBean)request.getAttribute("msgBean");
+MsgBean msgobj=(MsgBean)request.getAttribute("msgBean");
 pageContext.setAttribute("msg", msgobj);
 
 String sessId = session.getId();
@@ -61,89 +59,88 @@ button:hover {
 </head>
 
 <body>
-<div class="grid">
-    <div class="title">
-       	<h1>Online Recipe Book</h1>
-    </div>
-    
-    <div class="header">
-     	<c:out value="${msg.message}"/> 
-     	<c:out value="${sessid}"/>
-    </div>
-    
-    <div class="search">
-       <div class="search-container">
-     	<form method="post" action="RecipeServlet">
-            <input type="text" name="filterValue" value="${sessionbean.filterValue}">
-            <input type="hidden" name="currentPage" value="${sessionbean.currentPage}">
-     		<input type="hidden" name="recordsPerPage" value="${sessionbean.recordsPerPage}">
-            <button type="submit"><i class="fa fa-search"></i></button>
-        </form>    
-       </div>    
-    </div>
-    
-    <div class="sidebar">
-    	<form method="post" action="RecipeServlet">
-            <input type="hidden" name="filterValue" value="${sessionbean.filterValue}">
-            <input type="hidden" name="currentPage" value="${sessionbean.currentPage}">
-     		<input type="hidden" name="recordsPerPage" value="${sessionbean.recordsPerPage}">
-            <a class="active"><button class="active" style="text-align:left;border:none;width:100%" type="submit" name="action" value="List">List Recipes</button></a>
-            <a><button style="text-align:left;border:none;width:100%" type="submit" name="action" value="RouteToAddScreen">Add Recipe</button></a>
-        </form>
-    </div>
-    
-    <div class="content">
-        <c:if test="${sessionbean.currentPage == 0}">
-        	<h2>No Recipes Found</h2>
-        </c:if>
-        <c:if test="${sessionbean.currentPage != 0}">
-  			<form method="post" action="RecipeServlet">
-  				<input type="hidden" name="action" value="Show">
-        		<table style="width:100%">
-           			<c:forEach var="recipe" items="${sessionbean.recipeListObj}">
-     	   		   		<tr>
-     	      <!-- 	    		<td class="recipe-item"><a href="RecipeServlet?action=Show&recipeid=${recipe.getId()}">${recipe.getName()} </a></td> -->
-     	      	    		<td><button style="text-align:left;border:none;width:100%;background-color:white" type="submit" name="recipeid" value="${recipe.getId()}">${recipe.getName()}</button></td>
-       	     			</tr>
-       	    		</c:forEach>
-        		</table>
-        	</form>        
-        </c:if>
-	</div>
+	<div class="grid">
+	    <div class="title">
+	       	<h1>Online Recipe Book</h1>
+	    </div>
+	    
+	    <div class="header">
+	     	<c:out value="${msg.message}"/> 
+	<%--      	<c:out value="${sessid}"/> --%>
+	    </div>
+	    
+	    <div class="search">
+	       <div class="search-container">
+	     	<form method="post" action="RecipeServlet">
+	            <input type="text" name="filterValue" value="${sessionbean.filterValue}">
+	            <input type="hidden" name="currentPage" value="${sessionbean.currentPage}">
+	     		<input type="hidden" name="recordsPerPage" value="${sessionbean.recordsPerPage}">
+	            <button type="submit"><i class="fa fa-search"></i></button>
+	        </form>    
+	       </div>    
+	    </div>
+	    
+	    <div class="sidebar">
+	    	<form method="post" action="RecipeServlet">
+	            <input type="hidden" name="filterValue" value="${sessionbean.filterValue}">
+	            <input type="hidden" name="currentPage" value="${sessionbean.currentPage}">
+	     		<input type="hidden" name="recordsPerPage" value="${sessionbean.recordsPerPage}">
+	            <a class="active"><button class="active" style="text-align:left;border:none;width:100%" type="submit" name="action" value="List">List Recipes</button></a>
+	            <a><button style="text-align:left;border:none;width:100%" type="submit" name="action" value="RouteToAddScreen">Add Recipe</button></a>
+	        </form>
+	    </div>
+	    
+	    <div class="content">
+	        <c:if test="${sessionbean.currentPage == 0}">
+	        	<h2>No Recipes Found</h2>
+	        </c:if>
+	        <c:if test="${sessionbean.currentPage != 0}">
+	  			<form method="post" action="RecipeServlet">
+	  				<input type="hidden" name="action" value="Show">
+	        		<table style="width:100%">
+	           			<c:forEach var="recipe" items="${sessionbean.recipeListObj}">
+	     	   		   		<tr>
+	     	      	    		<td><button style="text-align:left;border:none;width:100%;background-color:white" type="submit" name="recipeid" value="${recipe.getId()}">${recipe.getName()}</button></td>
+	       	     			</tr>
+	       	    		</c:forEach>
+	        		</table>
+	        	</form>        
+	        </c:if>
+		</div>
+		
+	    <div class="footer">        
+	    	<nav>      
+	        <ul class="pagination" style="margin-top: 8px; margin-bottom: 8px;">
+	        	<c:if test="${sessionbean.currentPage > 1}">
+	            	<li class="nav-item">
+	            		<a class="page-link" href="RecipeServlet?action=List&recordsPerPage=${sessionbean.recordsPerPage}&currentPage=${sessionbean.currentPage-1}&filterValue=${filterValue}"><<</a>
+	            	</li>
+	        	</c:if>
 	
-    <div class="footer">        
-    	<nav>      
-        <ul class="pagination" style="margin-top: 8px; margin-bottom: 8px;">
-        	<c:if test="${sessionbean.currentPage > 1}">
-            	<li class="nav-item">
-            		<a class="page-link" href="RecipeServlet?action=List&recordsPerPage=${sessionbean.recordsPerPage}&currentPage=${sessionbean.currentPage-1}&filterValue=${filterValue}"><<</a>
-            	</li>
-        	</c:if>
-
-        	<c:forEach begin="1" end="${sessionbean.noOfPages}" var="i">
- 	        	<c:choose>
-   	           		<c:when test="${sessionbean.currentPage eq i}">
-                		<li class="nav-item active">
-                			<a class="page-link">${i}</a>
-                		</li>
-                	</c:when>
-                	<c:otherwise>
-                		<li class="nav-item">
-                			<a class="page-link" href="RecipeServlet?action=List&recordsPerPage=${sessionbean.recordsPerPage}&currentPage=${i}&filterValue=${filterValue}">${i}</a>
-						</li>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-
-        	<c:if test="${sessionbean.currentPage lt sessionbean.noOfPages}">
-            	<li class="nav-item">
-            		<a class="page-link" href="RecipeServlet?action=List&recordsPerPage=${sessionbean.recordsPerPage}&currentPage=${sessionbean.currentPage+1}&filterValue=${filterValue}">>></a>
-            	</li>
-        	</c:if>  
-		</ul>	    
-	    </nav>
-    </div>
-</div>
+	        	<c:forEach begin="1" end="${sessionbean.noOfPages}" var="i">
+	 	        	<c:choose>
+	   	           		<c:when test="${sessionbean.currentPage eq i}">
+	                		<li class="nav-item active">
+	                			<a class="page-link">${i}</a>
+	                		</li>
+	                	</c:when>
+	                	<c:otherwise>
+	                		<li class="nav-item">
+	                			<a class="page-link" href="RecipeServlet?action=List&recordsPerPage=${sessionbean.recordsPerPage}&currentPage=${i}&filterValue=${filterValue}">${i}</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+	
+	        	<c:if test="${sessionbean.currentPage lt sessionbean.noOfPages}">
+	            	<li class="nav-item">
+	            		<a class="page-link" href="RecipeServlet?action=List&recordsPerPage=${sessionbean.recordsPerPage}&currentPage=${sessionbean.currentPage+1}&filterValue=${filterValue}">>></a>
+	            	</li>
+	        	</c:if>  
+			</ul>	    
+		    </nav>
+	    </div>
+	</div>
 
 </body>
 </html>
